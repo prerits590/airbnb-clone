@@ -1,6 +1,8 @@
 import { StarIcon } from "@chakra-ui/icons";
 import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { GoShare } from "react-icons/go";
 
 export default function SpGallery() {
   return (
@@ -9,15 +11,31 @@ export default function SpGallery() {
         <Box className="sp-heading">
           <Heading>Vihang Farmhouse: Florican Room</Heading>
         </Box>
-        <Box className="sp-ratings">
-          <Box className="sp-ratings-box1">
-            <StarIcon></StarIcon>
-            <Text>99 reviews</Text>
-            <Text>Nashik, Maharashtra, India</Text>
+        <Box
+          className="sp-ratings"
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Box className="sp-ratings-box1" display="flex">
+            <StarIcon className="mx-1"> </StarIcon>
+
+            <h6>
+              4.86{" "}
+              <span style={{ fontWeight: "400", fontSize: "16px" }}>
+                99 reviews
+              </span>
+            </h6>
+            <h6 className="mx-2">Nashik, Maharashtra, India</h6>
           </Box>
-          <Box className="sp-ratings-box2">
-            <button>Share</button>
-            <button>Save</button>
+          <Box className="sp-ratings-box2 d-flex">
+            <button className="mx-2 d-flex">
+              <GoShare className="mx-1"></GoShare>
+              <h6>Share</h6>
+            </button>
+            <button className="d-flex">
+              <AiOutlineHeart className="mx-1"></AiOutlineHeart>
+              <h6>Save</h6>
+            </button>
           </Box>
         </Box>
 

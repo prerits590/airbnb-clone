@@ -8,7 +8,7 @@ import Spcontent from '../components/Spcontent';
 export default function Cardpage() {
   return (
     <div className="card-page">
-      <div className="card-page">
+      <div className="card-page1 ">
         <div className="navbar-div">
           <header id="full_nav">
             <div class="header">

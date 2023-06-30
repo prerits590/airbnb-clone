@@ -244,79 +244,143 @@ header {
   width: fit-content;
 } */
 
-.card-page .nav-ul{
+.card-page .nav-ul {
   border: solid black;
   width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: fit-content;
-
 }
-.start-search{
+.start-search {
   border: solid green;
-  
 }
-.start-search p{
+.start-search p {
   margin-bottom: 0 !important;
   align-items: center;
   /* padding-top: 0.3rem; */
 }
-.card-page .nav-ul .navbar-nav{
+.card-page .nav-ul .navbar-nav {
   display: flex;
   justify-content: space-between;
   border: solid blue;
   width: 100%;
 }
 
-.sp-gallery1 .grid{
-  border: solid green;
+.sp-gallery1 .grid {
+  /* border: solid green; */
   height: auto;
   border-radius: 20px;
   overflow: auto;
-  
 }
-.sp-gallery .grid .GridItem{
-  border: solid blue;
+.sp-gallery .grid .GridItem {
+  /* border: solid blue; */
   height: auto;
 }
-.sp-gallery1{
-  border: solid black;
+.sp-gallery1 {
+  /* border: solid black; */
   /* padding-left: 7vw; */
   /* padding-right: 7vw; */
 }
-p{
+p {
   margin: 0 !important;
 }
-.amenities1{
-  border: solid black;
-  display: flex;
-  
-}
-.sp-content-icon{
-  border: solid teal;
-  height: fit-content;
-  margin: 0.5rem;
-
-}
-.where-you-will-sleep .sleep-content{
-  border: solid red;
+.where-you-will-sleep .sleep-content {
+  /* border: solid red; */
   width: fit-content;
   /* padding: 1rem; */
-  
-
 }
-.sleep-box{
+.sleep-box {
   padding: 0.5rem;
 }
-.offering-box{
-  border: solid red;
+.offering-box {
+  /* border: solid red; */
   width: 100%;
-  
 }
-.offering-box ul{
-  border: solid black;
+.offering-box ul {
+  /* border: solid black; */
   text-decoration: none;
   list-style: none;
-  
+}
+.card-page1 {
+  height: fit-content;
+}
+.card-page {
+  height: fit-content;
+}
+.sp-input input {
+  border: 1px solid gray;
+  /* width: 50%; */
+  padding: 1rem;
+  margin: 1px;
+
+}
+.input-areaa {
+  width: 100% !important;
+  border-radius: 2px;
+  border: 1px solid gray;
+  padding: 1rem;
+
+}
+.sp-btn-box button {
+  /* border: solid white; */
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 15px;
+}
+.amenities1 {
+  /* border: solid black; */
+  display: flex;
+}
+.sp-content-icon {
+  /* border: solid teal; */
+  height: fit-content;
+  padding: 0.5rem;
+  /* margin: 0.5rem; */
+  margin-right: 1rem;
+  /* color: white; */
+}
+.sp-content-icon-text h5,
+.sp-content-icon-text h6 {
+  margin: 0 !important;
+}
+/* .sp-content-icon-text:first-child{
+  font-size: larger;
+} */
+.App {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+}
+h4 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+h6 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #222222;
+  margin: 0;
+}
+
+.offering-box li {
+  display: flex;
+  padding: 0.5rem;
+}
+.offering-box li h6 {
+  margin-left: 1rem;
+}
+.what-this-offers button {
+  border: solid white;
+}
+.main-btn {
+  /* border: solid black; */
+  background-color: #ed2558;
+  color: white;
+  padding: 0.7rem !important;
 }
