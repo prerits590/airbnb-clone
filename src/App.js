@@ -13,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        
         <Route path="/" element={<Homepage />} /> {/* 👈 Renders at /app/ */}
         <Route path="/Single/:id" element={<Cardpage />} /> {/* 👈 Renders at /app/ */}
       </Routes>

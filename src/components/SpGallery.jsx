@@ -6,7 +6,7 @@ import { GoShare } from "react-icons/go";
 
 export default function SpGallery() {
   return (
-    <div className="single-page-gallery container">
+    <div className="single-page-gallery container mt-4">
       <Box className="sp-gallery">
         <Box className="sp-heading">
           <Heading>Vihang Farmhouse: Florican Room</Heading>
@@ -16,7 +16,7 @@ export default function SpGallery() {
           display="flex"
           justifyContent="space-between"
         >
-          <Box className="sp-ratings-box1" display="flex">
+          <Box className="sp-ratings-box1 py-2" display="flex">
             <StarIcon className="mx-1"> </StarIcon>
 
             <h6>
@@ -27,7 +27,7 @@ export default function SpGallery() {
             </h6>
             <h6 className="mx-2">Nashik, Maharashtra, India</h6>
           </Box>
-          <Box className="sp-ratings-box2 d-flex">
+          <Box className="sp-ratings-box2 d-flex " >
             <button className="mx-2 d-flex">
               <GoShare className="mx-1"></GoShare>
               <h6>Share</h6>
@@ -39,7 +39,7 @@ export default function SpGallery() {
           </Box>
         </Box>
 
-        <Box className="sp-gallery1">
+        <Box className="sp-gallery1 py-3">
           <Grid
             templateColumns={["1fr", "repeat(4, 1fr)"]}
             // height="auto"

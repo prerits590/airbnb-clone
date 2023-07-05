@@ -25,26 +25,13 @@ export default function Card() {
     rating: 4,
   };
   return (
-  <Link to='/Single/3'>
-    <div className="card-div my-2">
+    <Link to="/Single/3">
+      <div className="card-div">
         <SimpleGrid minChildWidth="120px" spacing="5rem">
-          <Box bg="tomato" height="auto" className="card-box">
+          <Box height="auto" className="card-box">
             <Container>
-              <Flex
-                bg="#edf3f8"
-                _dark={{
-                  bg: "#3e3e3e",
-                }}
-                p={0}
-                w="full"
-                alignItems="center"
-                justifyContent="center"
-              >
+              <Flex p={0} w="full" alignItems="center" justifyContent="center">
                 <Box
-                  bg="white"
-                  _dark={{
-                    bg: "gray.800",
-                  }}
                   maxW="sm"
                   borderWidth="1px"
                   rounded="lg"
@@ -63,17 +50,8 @@ export default function Card() {
                       alignItems="baseline"
                       className="name-box"
                     >
-                     
                       <Box className="text-box2">
-                        <Text
-                          mt="1"
-                          fontWeight="semibold"
-                          as="p"
-                          lineHeight="tight"
-                          noOfLines={1}
-                        >
-                          {property.title}
-                        </Text>
+                        <h6>{property.title}</h6>
 
                         <Box className="rating-box">
                           <AiFillStar className="AiFillStar"></AiFillStar>
@@ -82,30 +60,29 @@ export default function Card() {
                       </Box>
                     </Box>
                     <Box className="fav-icon">
-                      <FiHeart className="FiHeart" color="white"></FiHeart>
+                      <FiHeart
+                        className="FiHeart"
+                        // style={{ backgroundColor: 'rgba(0, 0, 0, 0.5) '}}
+                        color="white"
+                      ></FiHeart>
                     </Box>
 
                     <Box className="extra-text">
-                      <Text>63 Kilometers away</Text>
-                      <Text>6-7 Jul</Text>
+                      <p>63 Kilometers away</p>
+                      <p>6-7 Jul</p>
                     </Box>
-                    <Box>
-                      {property.formattedPrice}
-                      <Box as="span" fontSize="sm" p="1">
-                        night
-                      </Box>
+                    <Box className="d-flex py-2">
+                      <h6>{property.formattedPrice}</h6>
+                      <p className="px-1">night</p>
+                     
                     </Box>
                   </Box>
                 </Box>
               </Flex>
             </Container>
           </Box>
-          
         </SimpleGrid>
-
-      
-    
-    </div>
-     </Link>
+      </div>
+    </Link>
   );
 }

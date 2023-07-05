@@ -15,7 +15,7 @@ import { PiFlowerTulipFill, PiTelevisionSimpleBold } from "react-icons/pi";
 import { MdOutlineBalcony, MdVerified } from "react-icons/md";
 import { BsPersonWorkspace } from "react-icons/bs";
 import { StarIcon } from "@chakra-ui/icons";
-import { GoVerified, IconName } from "react-icons/go";
+// import { GoVerified, IconName } from "react-icons/go";
 
 export default function Spcontent() {
   return (
@@ -37,7 +37,7 @@ export default function Spcontent() {
               >
                 <Box className="sp-text1 " width="100%">
                   <h4>Place to stay in a farm stay hosted by Madhumita</h4>
-                  <h6> 3 guests 1 bedroom 2 beds 1 private bathroom</h6>
+                  <h6 className="py-2"> 3 guests 1 bedroom 2 beds 1 private bathroom</h6>
                 </Box>
                 <Box
                   className="sp-profile p-3"
@@ -59,7 +59,7 @@ export default function Spcontent() {
 
                   <Box className="sp-content-icon-text">
                     <h5>Self check-in</h5>
-                    <h6>Lorem ipsum dolor sit amet.</h6>
+                    <p>Lorem ipsum dolor sit amet.</p>
                   </Box>
                 </Box>
                 <Box className="amenities1 py-3">
@@ -69,7 +69,7 @@ export default function Spcontent() {
 
                   <Box className="sp-content-icon-text">
                     <h5>Dive right in</h5>
-                    <h6>Lorem ipsum dolor sit amet.</h6>
+                    <p>Lorem ipsum dolor sit amet.</p>
                   </Box>
                 </Box>
                 <Box className="amenities1 py-3">
@@ -79,7 +79,7 @@ export default function Spcontent() {
 
                   <Box className="sp-content-icon-text">
                     <h5>Experianced host</h5>
-                    <h6>Lorem ipsum dolor sit amet consectetur.</h6>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
                   </Box>
                 </Box>
               </Box>
@@ -101,7 +101,7 @@ export default function Spcontent() {
               <hr />
               <Box className="where-you-will-sleep pt-4" p="10px">
                 <h4>Where you will sleep</h4>
-                <Box className="sleep-content border py-3">
+                <Box className="sleep-content py-3">
                   <Box className="sleep-icons d-flex p-1">
                     <BiBed className="mx-2"></BiBed>
                     <BiBed></BiBed>
@@ -208,8 +208,10 @@ export default function Spcontent() {
             position="sticky"
             top="0"
             overflowY="auto"
-            border="solid 1px gray"
+            // border="solid 1px gray"
             borderRadius="10px"
+            border=" 1px solid lightGray"
+            boxShadow=" rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
           >
             {/* <Box className="sp-sidebar2 " position="sticky" overflowY="auto"> */}
             <Box display="flex" justifyContent="space-between" className="pt-1">
@@ -224,7 +226,7 @@ export default function Spcontent() {
 
                 <h4>
                   4.86{" "}
-                  <span style={{ fontWeight: "400", fontSize: "16px" }}>
+                  <span style={{ fontWeight: "400", fontSize: "16px", color:'#717171' }}>
                     99 reviews
                   </span>
                 </h4>
