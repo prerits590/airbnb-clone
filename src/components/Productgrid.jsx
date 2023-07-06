@@ -1,8 +1,36 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../firebase";
 export default function ProductGrid() {
+  //  const [documentData, setDocumentData] = useState(null);
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      try {
+        const collectionRef = collection(db, "bnbs");
+        const querySnapshot = await getDocs(collectionRef);
+
+        querySnapshot.forEach((doc) => {
+          const docId = doc.id;
+          console.log("Document ID:", docId);
+          // You can store the document IDs in state or use them in any way you need
+        });
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+      }
+    };
+
+    fetchDocuments();
+  }, []);
+
   return (
     <div className="product-grid">
       <Box width="100%" p="0.5rem">
