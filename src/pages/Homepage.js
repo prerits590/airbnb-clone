@@ -32,7 +32,7 @@ export default function Homepage() {
   }, []);
   console.log("dataArr", dataArr);
   return (
-    <Link to={`/Home/id`}>
+    <Link to={`/Home/:id`}>
 
     
     <div>

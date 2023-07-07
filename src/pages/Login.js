@@ -11,32 +11,36 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
-
+  const navigate = useNavigate();
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
       const auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password).then(
-        (userCredential) => {
-          const user = userCredential.user;
-          console.log("User Signed in", user);
-          setEmail("");
-          setPassword("");
-        }
-      );
+      await signInWithEmailAndPassword(auth, email, password);
+      // (userCredential) => {
+      const user = auth.currentUser;
+      console.log("User Signed in", user);
+      setEmail("");
+      setPassword("");
+      setTimeout(() => {
+        navigate("/Home/:id");
+      }, 2000);
 
+      // navigate("/Home/:id");
+      // <Navigate to="/Home/:id" replace={true} />;
+
+      // redirectToHome();
+      // }
       toast({
         title: "Logged in",
         description: "Login Successfull",
@@ -46,10 +50,10 @@ export default function Login() {
         position: "top",
       });
     } catch (error) {
-      console.log("Error creating user:", error);
+      console.log("Error Logging in:", error);
       toast({
         title: "Account Error",
-        description: "An error occurred while creating your account.",
+        description: "An error occurred while logging in to your account.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -82,6 +86,7 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required="true"
                 />
               </FormControl>
               <FormControl id="password">
@@ -90,6 +95,7 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required="true"
                 />
               </FormControl>
 

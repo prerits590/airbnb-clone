@@ -14,14 +14,16 @@ import {
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase";
-import { Link } from "react-router-dom";
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
 
+  const navigate = useNavigate();
+
+  const auth = getAuth();
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
@@ -34,6 +36,10 @@ export default function Signup() {
       console.log("New user created:", user);
       setEmail("");
       setPassword("");
+      setTimeout(() => {
+        navigate("/Home/:id");
+      }, 3000);
+
       toast({
         title: "Account Created",
         description: "Your account has been successfully created.",
@@ -55,7 +61,6 @@ export default function Signup() {
     }
   };
   return (
-   
     <Flex
       minH={"100vh"}
       align={"center"}
@@ -110,13 +115,12 @@ export default function Signup() {
                 >
                   Sign in
                 </Button>
-               <Link to={'/Login'}>Already have an account? Login.</Link>
+                <Link to={"/Login"}>Already have an account? Login.</Link>
               </Stack>
             </form>
           </Stack>
         </Box>
       </Stack>
     </Flex>
-  
   );
 }

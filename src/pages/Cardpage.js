@@ -36,35 +36,55 @@ import { TbParking, TbToolsKitchen2 } from "react-icons/tb";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 
 import { BsPersonWorkspace } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function Cardpage() {
   const param = useParams();
-  const [bnbData, setBnbData]= useState({});
+  const [bnbData, setBnbData] = useState({});
+  const [date1, setDate1] = useState({});
+  const [date2, setDate2] = useState({});
+  const [guests, setGuests] = useState("");
+  const [cost, setCost] = useState("");
+  console.log(date1);
+  // console.log("costtt",cost);
+  let newDate1 = new Date(date1);
+  let newDate2 = new Date(date2);
+
+  let Difference_In_Time = newDate2.getTime() - newDate1.getTime();
+
+  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+  console.log("date", Difference_In_Days);
+
   console.log(param);
 
-  useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        const collectionRef = collection(db, "bnbs");
-        const docRef = doc(collectionRef,param.id );
+  const fetchDocuments = async () => {
+    try {
+      const collectionRef = collection(db, "bnbs");
+      const docRef = doc(collectionRef, param.id);
 
-        const docSnap = await getDoc(docRef);
+      const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          const data= docSnap.data();
-          setBnbData(data);
-          // console.log("Document data:", docSnap.data());
-        } else {
-          console.log("No such document!");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setBnbData(data);
+        // console.log("Document data:", docSnap.data());
+      } else {
+        console.log("No such document!");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
+  const handleGuests = (e) => {
+    setGuests(e.target.value);
+    const cal = e.target.value * bnbData.price * Difference_In_Days;
+    setCost(cal);
+  };
+
+  useEffect(() => {
     fetchDocuments();
-  }, [param.id]);
+  });
 
   return (
     <div className="card-page">
@@ -544,21 +564,26 @@ export default function Cardpage() {
                 </h6> */}
                 </Box>
               </Box>
+              <Box></Box>
               <Box className="sp-input pt-3" display="flex">
                 <Box maxWidth="50%">
                   <input
-                    type="number"
+                    type="date"
                     placeholder="Check-in Date"
                     width="100%"
                     className="input-areaa"
+                    value={date1}
+                    onChange={(e) => setDate1(e.target.value)}
                   />
                 </Box>
                 <Box maxWidth="50%">
                   <input
-                    type="number"
+                    type="date"
                     placeholder="Check-out Date"
                     width="100% "
                     className="input-areaa"
+                    value={date2}
+                    onChange={(e) => setDate2(e.target.value)}
                   />
                 </Box>
               </Box>
@@ -574,11 +599,15 @@ export default function Cardpage() {
                     type="number"
                     placeholder="Guests"
                     className="input-areaa"
+                    value={guests}
+                    onChange={(e) => handleGuests(e)}
                   />
                 </Box>
-                <button className="mt-2 main-btn" type="submit">
-                  Reserve
-                </button>
+                <Link to={"/Payment"}>
+                  <button className="mt-2 main-btn" type="submit">
+                    Reserve
+                  </button>
+                </Link>
               </Box>
               <Box
                 m={3}
@@ -594,12 +623,14 @@ export default function Cardpage() {
                   justifyContent="space-between"
                   className="pb-3"
                 >
-                  <h6>$500 x 5 nights</h6>
-                  <h6>$2500</h6>
+                  <h6>
+                    ${bnbData.price} x {Difference_In_Days || 0} nights
+                  </h6>
+                  <h6>${cost || 0}</h6>
                 </Box>
                 <Box display="flex" justifyContent="space-between">
                   <h6>Airbnb sservice fee</h6>
-                  <h6>352</h6>
+                  <h6>${cost / 10 || 0}</h6>
                 </Box>
 
                 <hr />
@@ -610,7 +641,7 @@ export default function Cardpage() {
                 >
                   <h5>Total before taxes</h5>
 
-                  <h5>$2852</h5>
+                  <h5>${(cost / 10 || 0) + (cost || 0)}</h5>
                 </Box>
               </Box>
               {/* </Box> */}
