@@ -1,104 +1,342 @@
+import React, { useState } from "react";
 import {
-  Flex,
+  Progress,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  HStack,
-  InputRightElement,
-  Stack,
+  ButtonGroup,
   Button,
   Heading,
-  Text,
-  useColorModeValue,
-  Link,
-  useDisclosure,
+  Flex,
+  FormControl,
+  GridItem,
+  FormLabel,
+  Input,
+  Select,
+  SimpleGrid,
+  InputLeftAddon,
+  InputGroup,
+  Textarea,
+  FormHelperText,
+  InputRightElement,
 } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+
+import { useToast } from "@chakra-ui/react";
+
+const Form1 = () => {
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+  return (
+    <>
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+        Payment
+      </Heading>
+      <FormControl mt="2%">
+        <FormLabel htmlFor="email" fontWeight={"normal"}>
+          Card Number*
+        </FormLabel>
+        <Input id="cardNo" type="number" />
+      </FormControl>
+      <Flex>
+        <FormControl mr="5%">
+          <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+            Expiry Date*
+          </FormLabel>
+          <Input type="date" id="ExpiryDate" />
+        </FormControl>
+
+        <FormControl mr="5%">
+          <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+            CVV*
+          </FormLabel>
+          <Input type="password" id="cvv" />
+        </FormControl>
+      </Flex>
+    </>
+  );
+};
+
+const Form2 = () => {
+  return (
+    <>
+      <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+       Payment Details
+      </Heading>
+      <FormControl as={GridItem} colSpan={[6, 3]}>
+        <FormLabel
+          htmlFor="country"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+        >
+          Country / Region
+        </FormLabel>
+        <Select
+          id="country"
+          name="country"
+          autoComplete="country"
+          placeholder="Select option"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        >
+          <option>United States</option>
+          <option>Canada</option>
+          <option>Mexico</option>
+        </Select>
+      </FormControl>
+
+      <FormControl as={GridItem} colSpan={6}>
+        <FormLabel
+          htmlFor="street_address"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          Street address
+        </FormLabel>
+        <Input
+          type="text"
+          name="street_address"
+          id="street_address"
+          autoComplete="street-address"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
+
+      <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
+        <FormLabel
+          htmlFor="city"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          City
+        </FormLabel>
+        <Input
+          type="text"
+          name="city"
+          id="city"
+          autoComplete="city"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
+
+      <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
+        <FormLabel
+          htmlFor="state"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          State / Province
+        </FormLabel>
+        <Input
+          type="text"
+          name="state"
+          id="state"
+          autoComplete="state"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
+
+      <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
+        <FormLabel
+          htmlFor="postal_code"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          ZIP / Postal
+        </FormLabel>
+        <Input
+          type="text"
+          name="postal_code"
+          id="postal_code"
+          autoComplete="postal-code"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
+    </>
+  );
+};
+
+
+
+
+// const Form3 = () => {
+//   return (
+//     <>
+//       <Heading w="100%" textAlign={'center'} fontWeight="normal">
+//         Social Handles
+//       </Heading>
+//       <SimpleGrid columns={1} spacing={6}>
+//         <FormControl as={GridItem} colSpan={[3, 2]}>
+//           <FormLabel
+//             fontSize="sm"
+//             fontWeight="md"
+//             color="gray.700"
+//             _dark={{
+//               color: 'gray.50',
+//             }}>
+//             Website
+//           </FormLabel>
+//           <InputGroup size="sm">
+//             <InputLeftAddon
+//               bg="gray.50"
+//               _dark={{
+//                 bg: 'gray.800',
+//               }}
+//               color="gray.500"
+//               rounded="md">
+//               http://
+//             </InputLeftAddon>
+//             <Input
+//               type="tel"
+//               placeholder="www.example.com"
+//               focusBorderColor="brand.400"
+//               rounded="md"
+//             />
+//           </InputGroup>
+//         </FormControl>
+
+//         <FormControl id="email" mt={1}>
+//           <FormLabel
+//             fontSize="sm"
+//             fontWeight="md"
+//             color="gray.700"
+//             _dark={{
+//               color: 'gray.50',
+//             }}>
+//             About
+//           </FormLabel>
+//           <Textarea
+//             placeholder="you@example.com"
+//             rows={3}
+//             shadow="sm"
+//             focusBorderColor="brand.400"
+//             fontSize={{
+//               sm: 'sm',
+//             }}
+//           />
+//           <FormHelperText>
+//             Brief description for your profile. URLs are hyperlinked.
+//           </FormHelperText>
+//         </FormControl>
+//       </SimpleGrid>
+//     </>
+//   );
+// };
 
 export default function Payment() {
-  const [showPassword, setShowPassword] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const toast = useToast();
+  const [step, setStep] = useState(1);
+  const [progress, setProgress] = useState(50);
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            Payment
-          </Heading>
-        </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl id="email" isRequired>
-              <FormLabel>Card Number</FormLabel>
-              <Input type="number" />
-            </FormControl>
-            <HStack>
-              <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>Expiry Date</FormLabel>
-                  <Input type="date" />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>CVV</FormLabel>
-                  <Input type="password" />
-                </FormControl>
-              </Box>
-            </HStack>
+    <>
+      <Box
+        borderWidth="1px"
+        rounded="lg"
+        shadow="1px 1px 3px rgba(0,0,0,0.3)"
+        maxWidth={800}
+        p={6}
+        m="10px auto"
+        as="form"
+      >
+        <Progress
+          hasStripe
+          value={progress}
+          mb="5%"
+          mx="5%"
+          isAnimated
+        ></Progress>
+        {step === 1 ? <Form1 /> : <Form2 />}
+        <ButtonGroup mt="5%" w="100%">
+          <Flex w="100%" justifyContent="space-between">
+            <Flex>
+              <Button
+                onClick={() => {
+                  setStep(step - 1);
+                  setProgress(progress - 50);
+                }}
+                isDisabled={step === 1}
+                colorScheme="teal"
+                variant="solid"
+                w="7rem"
+                mr="5%"
+              >
+                Back
+              </Button>
+              <Button
+                w="7rem"
+                isDisabled={step === 2}
+                onClick={() => {
+                  setStep(step + 1);
 
-            <Stack spacing={10} pt={2}>
-              <Button onClick={onOpen}>Open Modal</Button>
-
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Modal Title</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    Lorem, ipsum.
-                  </ModalBody>
-
-                  <ModalFooter>
-                    <Button colorScheme="blue" mr={3} onClick={onClose}>
-                      Close
-                    </Button>
-                    <Button variant="ghost">Secondary Action</Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-            </Stack>
-            <Stack pt={6}>
-              <Text align={"center"}>
-                Already a user? <Link color={"blue.400"}>Login</Link>
-              </Text>
-            </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+                  setProgress(100);
+                }}
+                colorScheme="teal"
+                variant="outline"
+              >
+                Next
+              </Button>
+            </Flex>
+            {step === 2 ? (
+              <Button
+                w="7rem"
+                colorScheme="red"
+                variant="solid"
+                onClick={() => {
+                  toast({
+                    title: "Account created.",
+                    description: "We've created your account for you.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                }}
+              >
+                Submit
+              </Button>
+            ) : null}
+          </Flex>
+        </ButtonGroup>
+      </Box>
+    </>
   );
 }

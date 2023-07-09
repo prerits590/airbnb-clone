@@ -3,7 +3,34 @@ import { BsGlobe } from "react-icons/bs";
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
 import SpGallery from "../components/SpGallery";
 import Spcontent from "../components/Spcontent";
-import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Input,
+  InputGroup,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Progress,
+  Select,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 
 import {
   Firestore,
@@ -45,15 +72,18 @@ export default function Cardpage() {
   const [date2, setDate2] = useState({});
   const [guests, setGuests] = useState("");
   const [cost, setCost] = useState("");
+  const [cardNo, setCardNo] = useState("");
+  const [expirydate, setExpirydate] = useState("");
+  const [cvv, setCvv] = useState("");
   console.log(date1);
   // console.log("costtt",cost);
   let newDate1 = new Date(date1);
   let newDate2 = new Date(date2);
-
+  let expiryDate = new Date(expirydate);
   let Difference_In_Time = newDate2.getTime() - newDate1.getTime();
 
   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-  console.log("date", Difference_In_Days);
+  // console.log("date", Difference_In_Days);
 
   console.log(param);
 
@@ -84,7 +114,216 @@ export default function Cardpage() {
 
   useEffect(() => {
     fetchDocuments();
-  });
+  }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // const toast = useToast();
+  // const [step, setStep] = useState(1);
+  // const [progress, setProgress] = useState(50);
+
+  // const Form1 = () => {
+  //   const [show, setShow] = React.useState(false);
+  //   const handleClick = () => setShow(!show);
+
+  // const [cardNo, setCardNo] = React.useState("");
+  // const [expirydate, setExpirydate] = React.useState("");
+  // const [cvv, setCvv] = React.useState("");
+
+  const handleCardNoChange = (e) => {
+    setCardNo(e.target.value);
+    console.log("card", cardNo);
+  };
+
+  const handleExpiryDateChange = (e) => {
+    setExpirydate(e.target.value);
+    console.log("expiry", expirydate);
+  };
+
+  const handleCvvChange = (e) => {
+    setCvv(e.target.value);
+    console.log("cvv", cvv);
+  };
+  //   return (
+  //     <>
+  //       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+  //         Payment
+  //       </Heading>
+
+  //       <FormControl mt="2%">
+  //         <FormLabel htmlFor="email" fontWeight={"normal"}>
+  //           Card Number*
+  //         </FormLabel>
+  //         <Input
+  //           id="cardNo"
+  //           type="number"
+  //           value={cardNo}
+  //           onChange={handleCardNoChange}
+  //         />
+  //       </FormControl>
+  //       <Flex>
+  //         <FormControl mr="5%">
+  //           <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+  //             Expiry Date*
+  //           </FormLabel>
+  //           <Input
+  //             type="date"
+  //             id="ExpiryDate"
+  //             value={expirydate}
+  //             onChange={handleExpiryDateChange}
+  //           />
+  //         </FormControl>
+
+  //         <FormControl mr="5%">
+  //           <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+  //             CVV*
+  //           </FormLabel>
+  //           <Input
+  //             type="password"
+  //             id="cvv"
+  //             value={cvv}
+  //             onChange={handleCvvChange}
+  //           />
+  //         </FormControl>
+  //       </Flex>
+  //     </>
+  //   );
+  // };
+
+  // const Form2 = () => {
+  //   return (
+  //     <>
+  //       <div className="card p-4">
+  //         {/* <Box className="p-4 d-flex justify-content-center text-align-center">
+  //           <h2>Payment Summary</h2>
+  //         </Box>
+  //         <Box>
+  //           <h4>Card No.</h4>
+  //           <h6>{cardNo}</h6>
+
+  //         </Box>
+  //         <Box>
+  //           <Box>
+  //           <h4>Expiry Date</h4>
+  //           <h6>{expirydate}</h6>
+  //           </Box>
+
+  //         </Box> */}
+
+  //         <FormControl mt="2%">
+  //           <FormLabel htmlFor="email" fontWeight={"normal"}>
+  //             Card Number*
+  //           </FormLabel>
+  //           <Input type="number" placeholder={cardNo} isReadOnly />
+  //         </FormControl>
+  //         <Flex>
+  //           <FormControl mr="5%">
+  //             <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+  //               Expiry Date*
+  //             </FormLabel>
+  //             <Input type="date" placeholder={expirydate || ""} isReadOnly />
+  //           </FormControl>
+
+  //           <FormControl mr="5%">
+  //             <FormLabel htmlFor="first-name" fontWeight={"normal"}>
+  //               CVV*
+  //             </FormLabel>
+  //             <Input type="password" placeholder={cvv} isReadOnly />
+  //           </FormControl>
+  //         </Flex>
+  //       </div>
+  //     </>
+  //   );
+  // };
+
+  // function multistepForm() {
+  //   return (
+  //     <>
+  //       <Box
+  //         borderWidth="1px"
+  //         rounded="lg"
+  //         shadow="1px 1px 3px rgba(0,0,0,0.3)"
+  //         maxWidth={800}
+  //         p={6}
+  //         m="10px auto"
+  //         as="form"
+  //       >
+  //         <Progress
+  //           hasStripe
+  //           value={progress}
+  //           mb="5%"
+  //           mx="5%"
+  //           isAnimated
+  //         ></Progress>
+  //         {step === 1 ? <Form1 /> : <Form2 />}
+  //         <ButtonGroup mt="5%" w="100%">
+  //           <Flex w="100%" justifyContent="space-between">
+  //             <Flex>
+  //               <Button
+  //                 onClick={() => {
+  //                   setStep(step - 1);
+  //                   setProgress(progress - 50);
+  //                 }}
+  //                 isDisabled={step === 1}
+  //                 colorScheme="teal"
+  //                 variant="solid"
+  //                 w="7rem"
+  //                 mr="5%"
+  //               >
+  //                 Back
+  //               </Button>
+  //               <Button
+  //                 w="7rem"
+  //                 isDisabled={step === 2}
+  //                 onClick={() => {
+  //                   setStep(step + 1);
+
+  //                   setProgress(100);
+  //                 }}
+  //                 colorScheme="teal"
+  //                 variant="outline"
+  //               >
+  //                 Next
+  //               </Button>
+  //             </Flex>
+  //             {step === 2 ? (
+  //               <Button
+  //                 w="7rem"
+  //                 colorScheme="red"
+  //                 variant="solid"
+  //                 onClick={() => {
+  //                   toast({
+  //                     title: "Account created.",
+  //                     description: "We've created your account for you.",
+  //                     status: "success",
+  //                     duration: 3000,
+  //                     isClosable: true,
+  //                   });
+  //                 }}
+  //               >
+  //                 Submit
+  //               </Button>
+  //             ) : null}
+  //           </Flex>
+  //         </ButtonGroup>
+  //       </Box>
+  //     </>
+  //   );
+  // }
+  const navigate = useNavigate();
+  const toast = useToast();
+  const paymentSucc = () => {
+    toast({
+      title: "Payment Successful",
+      description: "Your payment has been successful",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "top",
+    });
+    setTimeout(() => {
+      navigate("/Home/:id");
+    }, 2000);
+  };
 
   return (
     <div className="card-page">
@@ -603,11 +842,96 @@ export default function Cardpage() {
                     onChange={(e) => handleGuests(e)}
                   />
                 </Box>
-                <Link to={"/Payment"}>
-                  <button className="mt-2 main-btn" type="submit">
-                    Reserve
-                  </button>
-                </Link>
+                <Box>
+                  {/* <Link to={"/Payment"}>
+                    <Button onClick={onOpen}>Open Modal</Button>
+                  </Link> */}
+                  <Button onClick={onOpen}>Open Modal</Button>
+
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <Flex
+                          minH={"100vh"}
+                          align={"center"}
+                          justify={"center"}
+                          bg={useColorModeValue("gray.50", "gray.800")}
+                        >
+                          <Stack
+                            spacing={8}
+                            mx={"auto"}
+                            maxW={"lg"}
+                            py={12}
+                            px={6}
+                          >
+                            <Stack align={"center"}>
+                              <Heading fontSize={"4xl"} textAlign={"center"}>
+                                Payment Details
+                              </Heading>
+                            </Stack>
+                            <Box
+                              rounded={"lg"}
+                              bg={useColorModeValue("white", "gray.700")}
+                              boxShadow={"lg"}
+                              p={8}
+                            >
+                              <Stack spacing={4}>
+                                <FormControl id="cardNo" isRequired>
+                                  <FormLabel>Card Number</FormLabel>
+                                  <Input
+                                    type="number"
+                                    value={cardNo}
+                                    onChange={handleCardNoChange}
+                                  />
+                                </FormControl>
+                                <HStack>
+                                  <Box>
+                                    <FormControl id="expirtyDate" isRequired>
+                                      <FormLabel>Expiry Date</FormLabel>
+                                      <Input
+                                        type="date"
+                                        value={expirydate}
+                                        onChange={handleExpiryDateChange}
+                                      />
+                                    </FormControl>
+                                  </Box>
+                                  <Box>
+                                    <FormControl id="cvv" isRequired>
+                                      <FormLabel>CVV</FormLabel>
+                                      <Input
+                                        type="password"
+                                        value={cvv}
+                                        onChange={handleCvvChange}
+                                      />
+                                    </FormControl>
+                                  </Box>
+                                </HStack>
+
+                                <Stack spacing={10} pt={2}>
+                                  <Button
+                                    type="submit"
+                                    loadingText="Submitting"
+                                    size="lg"
+                                    bg={"blue.400"}
+                                    color={"white"}
+                                    _hover={{
+                                      bg: "blue.500",
+                                    }}
+                                    onClick={paymentSucc}
+                                  >
+                                    Pay Now
+                                  </Button>
+                                </Stack>
+                              </Stack>
+                            </Box>
+                          </Stack>
+                        </Flex>
+                      </ModalBody>
+                    </ModalContent>
+                  </Modal>
+                </Box>
               </Box>
               <Box
                 m={3}
@@ -763,143 +1087,7 @@ export default function Cardpage() {
           <hr />
           <Box>
             <div className="conatiner mt-5">
-              <Box>
-                <Grid
-                  templateColumns={"1fr 1fr 1fr 1fr"}
-                  height="fit-content"
-                  gap="4"
-                >
-                  <GridItem colSpan="1">
-                    <Box>
-                      <h5 className="mb-4">Support</h5>
-                      <ul>
-                        <li>
-                          <h6>Help Center</h6>
-                        </li>
-                        <li>
-                          <h6>AirCover</h6>
-                        </li>
-                        <li>
-                          <h6>Supporting people with diabilities</h6>
-                        </li>
-                        <li>
-                          <h6>Cancellation options</h6>
-                        </li>
-                        <li>
-                          <h6>Out COVID-19 Response</h6>
-                        </li>
-                        <li>
-                          <h6>Report a neighbourhoob problem</h6>
-                        </li>
-                      </ul>
-                    </Box>
-                  </GridItem>
-                  <GridItem colSpan="1">
-                    <Box>
-                      <h5 className="mb-4">Support</h5>
-                      <ul>
-                        <li>
-                          <h6>Help Center</h6>
-                        </li>
-                        <li>
-                          <h6>AirCover</h6>
-                        </li>
-                        <li>
-                          <h6>Supporting people with diabilities</h6>
-                        </li>
-                        <li>
-                          <h6>Cancellation options</h6>
-                        </li>
-                        <li>
-                          <h6>Out COVID-19 Response</h6>
-                        </li>
-                        <li>
-                          <h6>Report a neighbourhoob problem</h6>
-                        </li>
-                      </ul>
-                    </Box>
-                  </GridItem>
-                  <GridItem colSpan="1">
-                    <Box>
-                      <h5 className="mb-4">Support</h5>
-                      <ul>
-                        <li>
-                          <h6>Help Center</h6>
-                        </li>
-                        <li>
-                          <h6>AirCover</h6>
-                        </li>
-                        <li>
-                          <h6>Supporting people with diabilities</h6>
-                        </li>
-                        <li>
-                          <h6>Cancellation options</h6>
-                        </li>
-                        <li>
-                          <h6>Out COVID-19 Response</h6>
-                        </li>
-                        <li>
-                          <h6>Report a neighbourhoob problem</h6>
-                        </li>
-                      </ul>
-                    </Box>
-                  </GridItem>
-                  <GridItem colSpan="1">
-                    <Box>
-                      <h5 className="mb-4">Support</h5>
-                      <ul>
-                        <li>
-                          <h6>Help Center</h6>
-                        </li>
-                        <li>
-                          <h6>AirCover</h6>
-                        </li>
-                        <li>
-                          <h6>Supporting people with diabilities</h6>
-                        </li>
-                        <li>
-                          <h6>Cancellation options</h6>
-                        </li>
-                        <li>
-                          <h6>Out COVID-19 Response</h6>
-                        </li>
-                        <li>
-                          <h6>Report a neighbourhoob problem</h6>
-                        </li>
-                      </ul>
-                    </Box>
-                  </GridItem>
-                </Grid>
-                <hr />
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  className="pb-2"
-                >
-                  <Box display="flex" className="p-2">
-                    <a href="/">
-                      <h6 className="px-2">&#169; 2023 Airbnb, Inc</h6>
-                    </a>
-                    <a href="/">
-                      <h6 className="px-2">Privacy</h6>
-                    </a>
-                    <a href="/">
-                      <h6 className="px-2">Terms</h6>
-                    </a>
-                    <a href="/">
-                      <h6 className="px-2">Company details</h6>
-                    </a>
-                  </Box>
-                  <Box display="flex" alignItems="center">
-                    <BsGlobe className=" mb-2"></BsGlobe>
-                    <h5 className="px-2">English (IN)</h5>
-                    <h5 className="px-2">$ USD</h5>
-                    <AiFillInstagram className="mx-1 mb-2"></AiFillInstagram>
-                    <AiFillFacebook className="mx-1 mb-2"></AiFillFacebook>
-                    <AiFillTwitterSquare className="mx-1 mb-2"></AiFillTwitterSquare>
-                  </Box>
-                </Box>
-              </Box>
+              <Box></Box>
             </div>
           </Box>
         </Box>

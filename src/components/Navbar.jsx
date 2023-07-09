@@ -4,12 +4,19 @@ import { BsGlobe } from "react-icons/bs";
 import { SearchIcon } from "@chakra-ui/icons";
 // import { BiAtom, IconName } from "react-icons/bi";
 import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <div
       className="navbar-div"
-      style={{ position: "sticky", top: "0", overflowY: "auto" , zIndex:'99999', backgroundColor:'white'}}
+      style={{
+        position: "sticky",
+        top: "0",
+        overflowY: "auto",
+        zIndex: "99999",
+        backgroundColor: "white",
+      }}
     >
       <header id="full_nav">
         <div class="header">
@@ -38,7 +45,11 @@ export default function Navbar() {
                         alignItems: "center",
                       }}
                     >
-                      <a class="navbar-brand px-1" style={{ margin: "0" }} href="/">
+                      <a
+                        class="navbar-brand px-1"
+                        style={{ margin: "0" }}
+                        href="/"
+                      >
                         <img
                           src="https://cdn-icons-png.flaticon.com/512/2111/2111320.png"
                           alt=""
@@ -115,7 +126,9 @@ export default function Navbar() {
                         className="p-2"
                       >
                         <Box>
-                          <h6>Airbnb your home</h6>
+                          <Link to={"/Adminpage"}>
+                            <h6>Airbnb your home</h6>
+                          </Link>
                         </Box>
                         <Box>
                           <BsGlobe></BsGlobe>
