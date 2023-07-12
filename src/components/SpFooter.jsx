@@ -1,139 +1,92 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
-import React from "react";
-import { BsGlobe } from "react-icons/bs";
-import { AiFillFacebook, AiFillInstagram, AiFillTwitterSquare } from "react-icons/ai";
-export default function SpFooter() {
+import React, { ReactNode } from 'react';
+import {
+  Box,
+  chakra,
+  Container,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
+  VisuallyHidden,
+} from '@chakra-ui/react';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { BiLabel, BiLogOut } from 'react-icons/bi';
+
+
+const SocialButton = () => {
   return (
-    <div className="conatiner mt-5">
-      <Box>
-        <Grid templateColumns={"1fr 1fr 1fr 1fr"} height="fit-content" gap="4">
-          <GridItem colSpan="1">
-            <Box>
-              <h5 className="mb-4">Support</h5>
-              <ul>
-                <li>
-                  <h6>Help Center</h6>
-                </li>
-                <li>
-                  <h6>AirCover</h6>
-                </li>
-                <li>
-                  <h6>Supporting people with diabilities</h6>
-                </li>
-                <li>
-                  <h6>Cancellation options</h6>
-                </li>
-                <li>
-                  <h6>Out COVID-19 Response</h6>
-                </li>
-                <li>
-                  <h6>Report a neighbourhoob problem</h6>
-                </li>
-              </ul>
-            </Box>
-          </GridItem>
-          <GridItem colSpan="1">
-            <Box>
-              <h5 className="mb-4">Support</h5>
-              <ul>
-                <li>
-                  <h6>Help Center</h6>
-                </li>
-                <li>
-                  <h6>AirCover</h6>
-                </li>
-                <li>
-                  <h6>Supporting people with diabilities</h6>
-                </li>
-                <li>
-                  <h6>Cancellation options</h6>
-                </li>
-                <li>
-                  <h6>Out COVID-19 Response</h6>
-                </li>
-                <li>
-                  <h6>Report a neighbourhoob problem</h6>
-                </li>
-              </ul>
-            </Box>
-          </GridItem>
-          <GridItem colSpan="1">
-            <Box>
-              <h5 className="mb-4">Support</h5>
-              <ul>
-                <li>
-                  <h6>Help Center</h6>
-                </li>
-                <li>
-                  <h6>AirCover</h6>
-                </li>
-                <li>
-                  <h6>Supporting people with diabilities</h6>
-                </li>
-                <li>
-                  <h6>Cancellation options</h6>
-                </li>
-                <li>
-                  <h6>Out COVID-19 Response</h6>
-                </li>
-                <li>
-                  <h6>Report a neighbourhoob problem</h6>
-                </li>
-              </ul>
-            </Box>
-          </GridItem>
-          <GridItem colSpan="1">
-            <Box>
-              <h5 className="mb-4">Support</h5>
-              <ul>
-                <li>
-                  <h6>Help Center</h6>
-                </li>
-                <li>
-                  <h6>AirCover</h6>
-                </li>
-                <li>
-                  <h6>Supporting people with diabilities</h6>
-                </li>
-                <li>
-                  <h6>Cancellation options</h6>
-                </li>
-                <li>
-                  <h6>Out COVID-19 Response</h6>
-                </li>
-                <li>
-                  <h6>Report a neighbourhoob problem</h6>
-                </li>
-              </ul>
-            </Box>
-          </GridItem>
-        </Grid>
-        <hr />
-        <Box display="flex" justifyContent="space-between" className="pb-2">
-          <Box display="flex" className="p-2">
-            <a href="/">
-              <h6 className="px-2">&#169; 2023 Airbnb, Inc</h6>
-            </a>
-            <a href="/">
-              <h6 className="px-2">Privacy</h6>
-            </a>
-            <a href="/">
-              <h6 className="px-2">Terms</h6>
-            </a>
-            <a href="/">
-              <h6 className="px-2">Company details</h6>
-            </a>
-          </Box>
-          <Box display="flex" alignItems="center">
-            <BsGlobe className=" mb-2"></BsGlobe>
-            <h5 className="px-2">English (IN)</h5>
-            <h5 className="px-2">$ USD</h5>
-            <AiFillInstagram className="mx-1 mb-2"></AiFillInstagram>
-            <AiFillFacebook className="mx-1 mb-2"></AiFillFacebook>
-            <AiFillTwitterSquare className="mx-1 mb-2"></AiFillTwitterSquare>
-          </Box>
-        </Box>
+    <chakra.button
+      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+      rounded={'full'}
+      w={8}
+      h={8}
+      cursor={'pointer'}
+      as={'a'}
+      display={'inline-flex'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      transition={'background 0.3s ease'}
+      _hover={{
+        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+      }}
+    >
+      <VisuallyHidden>{BiLabel}</VisuallyHidden>
+      
+    </chakra.button>
+  );
+};
+
+export default function SmallCentered() {
+  return (
+    <Box
+      bg={useColorModeValue('gray.50', 'gray.900')}
+      color={useColorModeValue('gray.700', 'gray.200')}
+    >
+      <Container
+        as={Stack}
+        maxW={'6xl'}
+        py={4}
+        spacing={4}
+        justify={'center'}
+        align={'center'}
+      >
+        <BiLogOut />
+        <Stack direction={'row'} spacing={6}>
+          <Link href={'#'}>Home</Link>
+          <Link href={'#'}>About</Link>
+          <Link href={'#'}>Blog</Link>
+          <Link href={'#'}>Contact</Link>
+        </Stack>
+      </Container>
+
+      <Box
+        borderTopWidth={1}
+        borderStyle={'solid'}
+        borderColor={useColorModeValue('gray.200', 'gray.700')}
+      >
+        <Container
+          as={Stack}
+          maxW={'6xl'}
+          py={4}
+          direction={{ base: 'column', md: 'row' }}
+          spacing={4}
+          justify={{ base: 'center', md: 'space-between' }}
+          align={{ base: 'center', md: 'center' }}
+        >
+          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Stack direction={'row'} spacing={6}>
+            <SocialButton label={'Twitter'} href={'#'}>
+              <FaTwitter />
+            </SocialButton>
+            <SocialButton label={'YouTube'} href={'#'}>
+              <FaYoutube />
+            </SocialButton>
+            <SocialButton label={'Instagram'} href={'#'}>
+              <FaInstagram />
+            </SocialButton>
+          </Stack>
+        </Container>
       </Box>
-    </div>
+    </Box>
   );
 }

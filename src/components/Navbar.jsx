@@ -126,7 +126,7 @@ export default function Navbar() {
                         className="p-2"
                       >
                         <Box>
-                          <Link to={"/Adminpage"}>
+                          <Link to={"/Addhome"}>
                             <h6>Airbnb your home</h6>
                           </Link>
                         </Box>

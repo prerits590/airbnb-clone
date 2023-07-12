@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
 import {
   FaAccessibleIcon,
@@ -21,13 +21,8 @@ export default function Spcontent() {
   return (
     <div className="sp-content container mt-5 ">
       <Box className="sp-content pt-4 px-4">
-        <Grid
-          templateColumns={["repeat(3, 1fr)"]}
-          height="fit-content"
-          gap="6"
-          className="grid1"
-        >
-          <GridItem colSpan="2">
+        <SimpleGrid columns={[1, null, 3]} spacing={"1rem"}>
+         
             <Box className="sp-sidebar1">
               <Box
                 className="sp-heading1 "
@@ -37,7 +32,10 @@ export default function Spcontent() {
               >
                 <Box className="sp-text1 " width="100%">
                   <h4>Place to stay in a farm stay hosted by Madhumita</h4>
-                  <h6 className="py-2"> 3 guests 1 bedroom 2 beds 1 private bathroom</h6>
+                  <h6 className="py-2">
+                    {" "}
+                    3 guests 1 bedroom 2 beds 1 private bathroom
+                  </h6>
                 </Box>
                 <Box
                   className="sp-profile p-3"
@@ -200,7 +198,7 @@ export default function Spcontent() {
                 </Box>
               </Box>
             </Box>
-          </GridItem>
+        
           <GridItem
             colSpan="1"
             height="fit-content"
@@ -226,7 +224,13 @@ export default function Spcontent() {
 
                 <h4>
                   4.86{" "}
-                  <span style={{ fontWeight: "400", fontSize: "16px", color:'#717171' }}>
+                  <span
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "16px",
+                      color: "#717171",
+                    }}
+                  >
                     99 reviews
                   </span>
                 </h4>
@@ -306,7 +310,7 @@ export default function Spcontent() {
             </Box>
             {/* </Box> */}
           </GridItem>
-        </Grid>
+        </SimpleGrid>
 
         <Box className="owner-info">
           <Box display="flex">

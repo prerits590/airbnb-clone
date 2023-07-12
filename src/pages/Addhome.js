@@ -1,11 +1,14 @@
 import {
   Avatar,
   Box,
+  Button,
   Collapse,
   Drawer,
   DrawerContent,
   DrawerOverlay,
   Flex,
+  FormControl,
+  FormLabel,
   Icon,
   IconButton,
   Input,
@@ -24,19 +27,222 @@ import {
   BsGearFill,
 } from "react-icons/bs";
 import { FaBell, FaClipboardCheck, FaRss } from "react-icons/fa6";
-import { MdHome } from "react-icons/md";
+import { MdAdminPanelSettings, MdHome } from "react-icons/md";
 
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import firebase from 'firebase/compat/app';
 // Add a new document in collection "cities"
 
-export default function Adminpage() {
+export default function Addhome() {
   const sidebar = useDisclosure();
   const integrations = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
+
+  const [activeContent, setActiveContent] = useState("home");
+
+  const handleContentClick = (link) => {
+    setActiveContent(link);
+  };
+
+  const [removeId, setRemoveId] = useState("");
+
+  const [removeSubmit, setRemoveSubmit] = useState(false);
+  console.log("remove submit", removeSubmit);
+  const handleRemoveId = (e) => {
+    setRemoveId(e.target.value);
+    console.log("remove idd",removeId);
+  };
+
+  const removeProperty = async () => {
+    try {
+      const docRef = doc(db, "bnbs", removeId);
+      await deleteDoc(docRef);
+      console.log("Property removed with id:", removeId);
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+  
+
+  useEffect(() => {
+    if (removeSubmit) {
+      removeProperty();
+    }
+  }, [removeSubmit]);
+
+  const homeContent = () => {
+    return (
+      <Box>
+        <div className="form w-100 h-100">
+          <div className="title1 d-flex justify-content-center">
+            Airbnb your home
+          </div>
+          <div className="subtitle d-flex justify-content-center">
+            Let's create your account!
+          </div>
+          <div className="d-flex p-3 align-items-center justify-content-center">
+            <div className="input-container p-1 ">
+              <input
+                placeholder="Name"
+                type="text"
+                className="input"
+                value={name}
+                onChange={handleName}
+              />
+            </div>
+
+            <div className="input-container p-1">
+              <input
+                placeholder="Location"
+                type="text"
+                className="input"
+                id="lastname"
+                value={location}
+                onChange={handleLocation}
+              />
+            </div>
+          </div>
+          <div className="d-flex p-3 align-items-center justify-content-center">
+            <div className="input-container p-1 ">
+              <input
+                placeholder="Price"
+                type="text"
+                className="input"
+                value={price}
+                onChange={handlePrice}
+              />
+            </div>
+
+            <div className="input-container p-1">
+              <input
+                placeholder="Title 1"
+                type="text"
+                className="input"
+                value={title}
+                onChange={handleTitle}
+              />
+            </div>
+          </div>
+          <div className="d-flex p-3 align-items-center justify-content-center">
+            <div className="input-container p-1 ">
+              <input
+                placeholder="Title 2"
+                type="text"
+                className="input"
+                value={title2}
+                onChange={handleTitle2}
+              />
+            </div>
+
+            <div className="input-container p-1">
+              <input
+                placeholder="Image 1"
+                type="text"
+                className="input"
+                value={gridImg1}
+                onChange={handleGridImg1}
+              />
+            </div>
+          </div>
+          <div className="d-flex p-3 align-items-center justify-content-center">
+            <div className="input-container p-1 ">
+              <input
+                placeholder="Image 2"
+                type="text"
+                className="input"
+                value={gridImg2}
+                onChange={handleGridImg2}
+              />
+            </div>
+
+            <div className="input-container p-1">
+              <input
+                placeholder="Image 3"
+                type="text"
+                className="input"
+                value={gridImg3}
+                onChange={handleGridImg3}
+              />
+            </div>
+          </div>
+          <div className="d-flex p-3 align-items-center justify-content-center">
+            <div className="input-container p-1 ">
+              <input
+                placeholder="Image 4"
+                type="text"
+                className="input"
+                value={gridImg4}
+                onChange={handleGridImg4}
+              />
+            </div>
+
+            <div className="input-container p-1">
+              <input
+                placeholder="Image 5"
+                type="text"
+                className="input"
+                value={gridImg5}
+                onChange={handleGridImg5}
+              />
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <button
+              className="submit w-50"
+              type="submit"
+              onClick={() => setSubmitClicked(true)}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </Box>
+    );
+  };
+
+  const adminContent = () => {
+    return (
+      <Box
+        className=""
+        height={"100%"}
+        w={"100%"}
+        // bg={"#15172B"}
+      >
+        <Box>
+          <h4 className="">Remove Properties</h4>
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>Enter the ID of Document to Remove</FormLabel>
+            <Input type="text" value={removeId} onChange={handleRemoveId} />
+            <Button
+              onClick={() => {
+                setRemoveSubmit(true);
+                removeProperty();
+              }}
+              type="submit"
+              colorScheme="red"
+            >
+              Remove
+            </Button>
+          </FormControl>
+        </Box>
+      </Box>
+    );
+  };
+
+  const mainContent = (activeContent) => {
+    if (activeContent === "home") {
+      console.log("home content called");
+      return homeContent();
+    } else if (activeContent === "admin") {
+      console.log("admin content called");
+      return adminContent();
+    }
+  };
 
   const NavItem = (props) => {
     const { icon, children, ...rest } = props;
@@ -120,23 +326,14 @@ export default function Adminpage() {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem icon={MdHome}>Home</NavItem>
-        <NavItem icon={FaRss}>Articles</NavItem>
-        {/* <NavItem icon={HiCollection}>Collections</NavItem> */}
-        {/* <NavItem icon={FaClipboardCheck}>Checklists</NavItem>
-        <Collapse in={integrations.isOpen}>
-          <NavItem pl="12" py="2">
-            Shopify
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Slack
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Zapier
-          </NavItem>
-        </Collapse> */}
-        <NavItem icon={AiFillGift}>Changelog</NavItem>
-        <NavItem icon={BsGearFill}>Settings</NavItem>
+        <NavItem icon={MdHome}>
+          <NavLink onClick={() => handleContentClick("home")}>Home</NavLink>
+        </NavItem>
+        <NavItem icon={MdAdminPanelSettings}>
+          <NavLink onClick={() => handleContentClick("admin")}>
+            Admin Panel
+          </NavLink>
+        </NavItem>
       </Flex>
     </Box>
   );
@@ -318,165 +515,7 @@ export default function Adminpage() {
         </Flex>
 
         <Box as="main" p="4">
-          {/* Add content here, remove div below  */}
-          <Box>
-            <div className="form w-100 h-100">
-              <div className="title1 d-flex justify-content-center">
-                Airbnb your home
-              </div>
-              <div className="subtitle d-flex justify-content-center">
-                Let's create your account!
-              </div>
-              <div className="d-flex p-3 align-items-center justify-content-center">
-                <div className="input-container p-1 ">
-                  <input
-                    placeholder="Name"
-                    type="text"
-                    className="input"
-                    value={name}
-                    onChange={handleName}
-                  />
-                  {/* <div className="cut "></div> */}
-                </div>
-
-                <div className="input-container p-1">
-                  <input
-                    placeholder="Location"
-                    type="text"
-                    className="input"
-                    id="lastname"
-                    value={location}
-                    onChange={handleLocation}
-                  />
-                  {/* <div className="cut"></div>
-                  <label className="iLabel" for="lastname">
-                    Location
-                  </label> */}
-                </div>
-              </div>
-              <div className="d-flex p-3 align-items-center justify-content-center">
-                <div className="input-container p-1 ">
-                  <input
-                    placeholder="Price"
-                    type="text"
-                    className="input"
-                    value={price}
-                    onChange={handlePrice}
-                  />
-                  {/* <div className="cut "></div>
-                  <label className="iLabel" for="firstname">
-                    Price
-                  </label> */}
-                </div>
-
-                <div className="input-container p-1">
-                  <input
-                    placeholder="Title 1"
-                    type="text"
-                    className="input"
-                    value={title}
-                    onChange={handleTitle}
-                  />
-                </div>
-              </div>
-              <div className="d-flex p-3 align-items-center justify-content-center">
-                <div className="input-container p-1 ">
-                  <input
-                    placeholder="Title 2"
-                    type="text"
-                    className="input"
-                    value={title2}
-                    onChange={handleTitle2}
-                  />
-                  {/* <div className="cut "></div>
-                  <label className="iLabel" for="firstname">
-                    Title 2
-                  </label> */}
-                </div>
-
-                <div className="input-container p-1">
-                  <input
-                    placeholder="Image 1"
-                    type="text"
-                    className="input"
-                    value={gridImg1}
-                    onChange={handleGridImg1}
-                  />
-                  {/* <div className="cut"></div>
-                  <label className="iLabel" for="lastname">
-                    Image 1
-                  </label> */}
-                </div>
-              </div>
-              <div className="d-flex p-3 align-items-center justify-content-center">
-                <div className="input-container p-1 ">
-                  <input
-                    placeholder="Image 2"
-                    type="text"
-                    className="input"
-                    value={gridImg2}
-                    onChange={handleGridImg2}
-                  />
-                  {/* <div className="cut "></div>
-                  <label className="iLabel" for="firstname">
-                    Image 2
-                  </label> */}
-                </div>
-
-                <div className="input-container p-1">
-                  <input
-                    placeholder="Image 3"
-                    type="text"
-                    className="input"
-                    value={gridImg3}
-                    onChange={handleGridImg3}
-                  />
-                  {/* <div className="cut"></div>
-                  <label className="iLabel" for="lastname">
-                    Image 3
-                  </label> */}
-                </div>
-              </div>
-              <div className="d-flex p-3 align-items-center justify-content-center">
-                <div className="input-container p-1 ">
-                  <input
-                    placeholder="Image 4"
-                    type="text"
-                    className="input"
-                    value={gridImg4}
-                    onChange={handleGridImg4}
-                  />
-                  {/* <div className="cut "></div>
-                  <label className="iLabel" for="firstname">
-                    Image 4
-                  </label> */}
-                </div>
-
-                <div className="input-container p-1">
-                  <input
-                    placeholder="Image 5"
-                    type="text"
-                    className="input"
-                    value={gridImg5}
-                    onChange={handleGridImg5}
-                  />
-                  {/* <div className="cut"></div>
-                  <label className="iLabel" for="lastname">
-                    Image 5
-                  </label> */}
-                </div>
-              </div>
-              <div className="d-flex justify-content-center">
-                <button
-                  className="submit w-50"
-                  type="submit"
-                  onClick={() => setSubmitClicked(true)}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-          </Box>
+          {mainContent(activeContent)}
         </Box>
       </Box>
     </Box>

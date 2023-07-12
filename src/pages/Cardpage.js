@@ -25,6 +25,7 @@ import {
   ModalOverlay,
   Progress,
   Select,
+  SimpleGrid,
   Stack,
   Text,
   useColorModeValue,
@@ -64,6 +65,7 @@ import { PiTelevisionSimpleBold } from "react-icons/pi";
 
 import { BsPersonWorkspace } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import SpFooter from "../components/SpFooter";
 
 export default function Cardpage() {
   const param = useParams();
@@ -572,14 +574,10 @@ export default function Cardpage() {
 
       <div className="sp-content container mt-5 ">
         <Box className="sp-content pt-4 px-4">
-          <Grid
-            templateColumns={["repeat(3, 1fr)"]}
-            height="fit-content"
-            gap="6"
-            className="grid1"
-          >
-            <GridItem colSpan="2">
-              <Box className="sp-sidebar1">
+          
+             <SimpleGrid columns={[1, null, 2]} spacing={"1rem"}>
+           
+              <Box className="sp-sidebar1 ">
                 <Box
                   className="sp-heading1 "
                   display="flex"
@@ -741,20 +739,12 @@ export default function Cardpage() {
                     </Box>
                     <hr />
                     <Box className="sp-reviews">
-                      {/* <Box className="review" display="flex">
-                        <StarIcon className="mx-1 mt-1"> </StarIcon>
-                        <h4>
-                          {bnbData.rating}
-                          <span style={{ fontWeight: "400", fontSize: "16px", marginLeft:'8px' }}>
-                            {bnbData.reviews} reviews
-                          </span>
-                        </h4>
-                      </Box> */}
+                     
                     </Box>
                   </Box>
                 </Box>
               </Box>
-            </GridItem>
+           
             <GridItem
               colSpan="1"
               height="fit-content"
@@ -766,8 +756,8 @@ export default function Cardpage() {
               borderRadius="10px"
               border=" 1px solid lightGray"
               boxShadow=" rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
-            >
-              {/* <Box className="sp-sidebar2 " position="sticky" overflowY="auto"> */}
+            > 
+           
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -798,9 +788,7 @@ export default function Cardpage() {
                       {bnbData.reviews} reviews
                     </span>
                   </h4>
-                  {/* <h6 className="mx-1 align-items-center d-flex " color="#717171">
-                  99 reviews
-                </h6> */}
+             
                 </Box>
               </Box>
               <Box></Box>
@@ -843,9 +831,7 @@ export default function Cardpage() {
                   />
                 </Box>
                 <Box>
-                  {/* <Link to={"/Payment"}>
-                    <Button onClick={onOpen}>Open Modal</Button>
-                  </Link> */}
+              
                   <Button onClick={onOpen}>Open Modal</Button>
 
                   <Modal isOpen={isOpen} onClose={onClose}>
@@ -968,9 +954,9 @@ export default function Cardpage() {
                   <h5>${(cost / 10 || 0) + (cost || 0)}</h5>
                 </Box>
               </Box>
-              {/* </Box> */}
+             
             </GridItem>
-          </Grid>
+          </SimpleGrid>
 
           <Box className="owner-info">
             <Box display="flex">
@@ -1087,7 +1073,9 @@ export default function Cardpage() {
           <hr />
           <Box>
             <div className="conatiner mt-5">
-              <Box></Box>
+              <Box>
+                <SpFooter></SpFooter>
+              </Box>
             </div>
           </Box>
         </Box>
