@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
-import SpGallery from "../components/SpGallery";
-import Spcontent from "../components/Spcontent";
+
 import {
   Box,
   Button,
-  ButtonGroup,
   Flex,
   FormControl,
   FormLabel,
@@ -15,39 +13,22 @@ import {
   HStack,
   Heading,
   Input,
-  InputGroup,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
-  Progress,
-  Select,
   SimpleGrid,
   Stack,
-  Text,
   useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 
-import {
-  Firestore,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { GoShare } from "react-icons/go";
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillTwitterSquare,
-  AiOutlineHeart,
-} from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineBalcony, MdVerified } from "react-icons/md";
 import {
   FaAccessibleIcon,
@@ -64,7 +45,7 @@ import { TbParking, TbToolsKitchen2 } from "react-icons/tb";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 
 import { BsPersonWorkspace } from "react-icons/bs";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SpFooter from "../components/SpFooter";
 
 export default function Cardpage() {
@@ -119,18 +100,6 @@ export default function Cardpage() {
   }, []);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // const toast = useToast();
-  // const [step, setStep] = useState(1);
-  // const [progress, setProgress] = useState(50);
-
-  // const Form1 = () => {
-  //   const [show, setShow] = React.useState(false);
-  //   const handleClick = () => setShow(!show);
-
-  // const [cardNo, setCardNo] = React.useState("");
-  // const [expirydate, setExpirydate] = React.useState("");
-  // const [cvv, setCvv] = React.useState("");
-
   const handleCardNoChange = (e) => {
     setCardNo(e.target.value);
     console.log("card", cardNo);
@@ -145,172 +114,6 @@ export default function Cardpage() {
     setCvv(e.target.value);
     console.log("cvv", cvv);
   };
-  //   return (
-  //     <>
-  //       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-  //         Payment
-  //       </Heading>
-
-  //       <FormControl mt="2%">
-  //         <FormLabel htmlFor="email" fontWeight={"normal"}>
-  //           Card Number*
-  //         </FormLabel>
-  //         <Input
-  //           id="cardNo"
-  //           type="number"
-  //           value={cardNo}
-  //           onChange={handleCardNoChange}
-  //         />
-  //       </FormControl>
-  //       <Flex>
-  //         <FormControl mr="5%">
-  //           <FormLabel htmlFor="first-name" fontWeight={"normal"}>
-  //             Expiry Date*
-  //           </FormLabel>
-  //           <Input
-  //             type="date"
-  //             id="ExpiryDate"
-  //             value={expirydate}
-  //             onChange={handleExpiryDateChange}
-  //           />
-  //         </FormControl>
-
-  //         <FormControl mr="5%">
-  //           <FormLabel htmlFor="first-name" fontWeight={"normal"}>
-  //             CVV*
-  //           </FormLabel>
-  //           <Input
-  //             type="password"
-  //             id="cvv"
-  //             value={cvv}
-  //             onChange={handleCvvChange}
-  //           />
-  //         </FormControl>
-  //       </Flex>
-  //     </>
-  //   );
-  // };
-
-  // const Form2 = () => {
-  //   return (
-  //     <>
-  //       <div className="card p-4">
-  //         {/* <Box className="p-4 d-flex justify-content-center text-align-center">
-  //           <h2>Payment Summary</h2>
-  //         </Box>
-  //         <Box>
-  //           <h4>Card No.</h4>
-  //           <h6>{cardNo}</h6>
-
-  //         </Box>
-  //         <Box>
-  //           <Box>
-  //           <h4>Expiry Date</h4>
-  //           <h6>{expirydate}</h6>
-  //           </Box>
-
-  //         </Box> */}
-
-  //         <FormControl mt="2%">
-  //           <FormLabel htmlFor="email" fontWeight={"normal"}>
-  //             Card Number*
-  //           </FormLabel>
-  //           <Input type="number" placeholder={cardNo} isReadOnly />
-  //         </FormControl>
-  //         <Flex>
-  //           <FormControl mr="5%">
-  //             <FormLabel htmlFor="first-name" fontWeight={"normal"}>
-  //               Expiry Date*
-  //             </FormLabel>
-  //             <Input type="date" placeholder={expirydate || ""} isReadOnly />
-  //           </FormControl>
-
-  //           <FormControl mr="5%">
-  //             <FormLabel htmlFor="first-name" fontWeight={"normal"}>
-  //               CVV*
-  //             </FormLabel>
-  //             <Input type="password" placeholder={cvv} isReadOnly />
-  //           </FormControl>
-  //         </Flex>
-  //       </div>
-  //     </>
-  //   );
-  // };
-
-  // function multistepForm() {
-  //   return (
-  //     <>
-  //       <Box
-  //         borderWidth="1px"
-  //         rounded="lg"
-  //         shadow="1px 1px 3px rgba(0,0,0,0.3)"
-  //         maxWidth={800}
-  //         p={6}
-  //         m="10px auto"
-  //         as="form"
-  //       >
-  //         <Progress
-  //           hasStripe
-  //           value={progress}
-  //           mb="5%"
-  //           mx="5%"
-  //           isAnimated
-  //         ></Progress>
-  //         {step === 1 ? <Form1 /> : <Form2 />}
-  //         <ButtonGroup mt="5%" w="100%">
-  //           <Flex w="100%" justifyContent="space-between">
-  //             <Flex>
-  //               <Button
-  //                 onClick={() => {
-  //                   setStep(step - 1);
-  //                   setProgress(progress - 50);
-  //                 }}
-  //                 isDisabled={step === 1}
-  //                 colorScheme="teal"
-  //                 variant="solid"
-  //                 w="7rem"
-  //                 mr="5%"
-  //               >
-  //                 Back
-  //               </Button>
-  //               <Button
-  //                 w="7rem"
-  //                 isDisabled={step === 2}
-  //                 onClick={() => {
-  //                   setStep(step + 1);
-
-  //                   setProgress(100);
-  //                 }}
-  //                 colorScheme="teal"
-  //                 variant="outline"
-  //               >
-  //                 Next
-  //               </Button>
-  //             </Flex>
-  //             {step === 2 ? (
-  //               <Button
-  //                 w="7rem"
-  //                 colorScheme="red"
-  //                 variant="solid"
-  //                 onClick={() => {
-  //                   toast({
-  //                     title: "Account created.",
-  //                     description: "We've created your account for you.",
-  //                     status: "success",
-  //                     duration: 3000,
-  //                     isClosable: true,
-  //                   });
-  //                 }}
-  //               >
-  //                 Submit
-  //               </Button>
-  //             ) : null}
-  //           </Flex>
-  //         </ButtonGroup>
-  //       </Box>
-  //     </>
-  //   );
-  // }
   const navigate = useNavigate();
   const toast = useToast();
   const paymentSucc = () => {
@@ -343,7 +146,6 @@ export default function Cardpage() {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  {/* <!-- <span class="navbar-toggler-icon"></span> --> */}
                   <i class=" navbar-toggler-icon"></i>
                 </button>
                 <div class="collapse navbar-collapse p-2" id="navbarNav">
@@ -386,26 +188,6 @@ export default function Cardpage() {
                         </div>
                       </div>
                       <div className="col-3 px-5">
-                        {/* <div class="header-right border ">
-                        <div class="text-lg-end pt-3 text-div2">
-                          <div className="p-tag-nav">
-                            <h6>Airbnb your home</h6>
-                          </div>
-                          <div className="icon-navbar">
-                          </div>
-                          <div className="nav-user-btn">
-                            <button className="nav-btn border d-flex">
-                              <div className="user1 px-2">
-                                <i class="fa-solid fa-bars"></i>
-                              </div>
-                              <div className="user2">
-                                <i class="fa-solid fa-circle-user"></i>
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      
-                      </div> */}
                         <Box
                           display={"flex"}
                           justifyContent={"space-between"}
@@ -574,177 +356,173 @@ export default function Cardpage() {
 
       <div className="sp-content container mt-5 ">
         <Box className="sp-content pt-4 px-4">
-          
-             <SimpleGrid columns={[1, null, 2]} spacing={"1rem"}>
-           
-              <Box className="sp-sidebar1 ">
+          <SimpleGrid columns={[1, null, 2]} spacing={"1rem"}>
+            <Box className="sp-sidebar1 ">
+              <Box
+                className="sp-heading1 "
+                display="flex"
+                justifyContent="space-between"
+                p="10px"
+              >
+                <Box className="sp-text1 " width="100%">
+                  <h4>{bnbData.title2}</h4>
+                  <h6 className="py-2">
+                    {" "}
+                    3 guests 1 bedroom 2 beds 1 private bathroom
+                  </h6>
+                </Box>
                 <Box
-                  className="sp-heading1 "
-                  display="flex"
-                  justifyContent="space-between"
-                  p="10px"
+                  className="sp-profile p-3"
+                  // border="solid white"
+                  height="fit-content"
+                  borderRadius="50%"
+                  bg={"#232323"}
+                  color={"white"}
                 >
-                  <Box className="sp-text1 " width="100%">
-                    <h4>{bnbData.title2}</h4>
-                    <h6 className="py-2">
-                      {" "}
-                      3 guests 1 bedroom 2 beds 1 private bathroom
-                    </h6>
+                  <FaUserLarge></FaUserLarge>
+                </Box>
+              </Box>
+              <hr />
+              <Box className="sp-content-amenities " p="10px">
+                <Box className="amenities1 py-3">
+                  <Box className="sp-content-icon">
+                    <FaAccessibleIcon></FaAccessibleIcon>
                   </Box>
-                  <Box
-                    className="sp-profile p-3"
-                    // border="solid white"
-                    height="fit-content"
-                    borderRadius="50%"
-                    bg={"#232323"}
-                    color={"white"}
-                  >
-                    <FaUserLarge></FaUserLarge>
+
+                  <Box className="sp-content-icon-text">
+                    <h5>Self check-in</h5>
+                    <p>Lorem ipsum dolor sit amet.</p>
                   </Box>
                 </Box>
-                <hr />
-                <Box className="sp-content-amenities " p="10px">
-                  <Box className="amenities1 py-3">
-                    <Box className="sp-content-icon">
-                      <FaAccessibleIcon></FaAccessibleIcon>
-                    </Box>
-
-                    <Box className="sp-content-icon-text">
-                      <h5>Self check-in</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                    </Box>
+                <Box className="amenities1 py-3">
+                  <Box className="sp-content-icon">
+                    <FaSwimmingPool></FaSwimmingPool>
                   </Box>
-                  <Box className="amenities1 py-3">
-                    <Box className="sp-content-icon">
-                      <FaSwimmingPool></FaSwimmingPool>
-                    </Box>
 
-                    <Box className="sp-content-icon-text">
-                      <h5>Dive right in</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                    </Box>
-                  </Box>
-                  <Box className="amenities1 py-3">
-                    <Box className="sp-content-icon">
-                      <FaMedal></FaMedal>
-                    </Box>
-
-                    <Box className="sp-content-icon-text">
-                      <h5>Experianced host</h5>
-                      <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    </Box>
+                  <Box className="sp-content-icon-text">
+                    <h5>Dive right in</h5>
+                    <p>Lorem ipsum dolor sit amet.</p>
                   </Box>
                 </Box>
-                <hr />
-
-                <Box className="sp-content-description" p="10px">
-                  <h6>
-                    We don’t offer any discounts for bookings below 7 days nor
-                    take bookings outside of Airbnb.
-                  </h6>
-                  <h6>
-                    Vihang Farmhouse is airy, bright, and simplistic with a
-                    wonderful view of the backwaters and grasslands of Gangapur
-                    Dam, an Important Bird Area! We are located a 20 minute
-                    drive away from Sula, York, and Soma vineyards and wineries
-                    which are on the opposite
-                  </h6>
-                </Box>
-                <hr />
-                <Box className="where-you-will-sleep pt-4" p="10px">
-                  <h4>Where you will sleep</h4>
-                  <Box className="sleep-content py-3">
-                    <Box className="sleep-icons d-flex p-1">
-                      <BiBed className="mx-2"></BiBed>
-                      <BiBed></BiBed>
-                    </Box>
-                    <Box className="sleep-box ">
-                      <Box w="fit-content">
-                        <h5>Bedroom</h5>
-                      </Box>
-                      <Box w="60%">
-                        <h6>1 queen bed ,1 single bed</h6>
-                      </Box>
-                    </Box>
+                <Box className="amenities1 py-3">
+                  <Box className="sp-content-icon">
+                    <FaMedal></FaMedal>
                   </Box>
-                  <hr />
 
-                  <Box className="what-this-offers">
-                    <Box className="offerings-list">
-                      <h4 className="py-2 px-0">What this place offers</h4>
-                      <Box className="offering-box">
-                        <Grid templateColumns="1fr 1fr" gap={2}>
-                          <GridItem w="100% " h="fit-content">
-                            <ul>
-                              <li>
-                                {" "}
-                                <TbToolsKitchen2></TbToolsKitchen2>
-                                <h6>Kitchen</h6>
-                              </li>
-                              <li>
-                                <TbParking></TbParking>
-                                <h6>Parking access</h6>
-                              </li>
-                              <li>
-                                <PiTelevisionSimpleBold></PiTelevisionSimpleBold>
-                                <h6>Television</h6>
-                              </li>
-                              <li>
-                                <MdOutlineBalcony></MdOutlineBalcony>
-                                <h6>Balcony</h6>
-                              </li>
-                              <li>
-                                <BsPersonWorkspace></BsPersonWorkspace>
-                                <h6>Personal workplace</h6>
-                              </li>
-                            </ul>
-                          </GridItem>
-                          <GridItem w="100% " h="fit-content">
-                            <ul>
-                              <li>
-                                <FaSnowflake></FaSnowflake>
-                                <h6>Air conditioning</h6>
-                              </li>
-                              <li>
-                                <FaSwimmingPool></FaSwimmingPool>
-
-                                <h6>Private pool</h6>
-                              </li>
-                              <li>
-                                <FaLuggageCart></FaLuggageCart>
-                                <h6>Luggage cart available</h6>
-                              </li>
-                              <li>
-                                <FaMountain></FaMountain>
-                                <h6>Mountain view</h6>
-                              </li>
-                              <li>
-                                <PiFlowerTulipFill></PiFlowerTulipFill>
-                                <h6>Private garden</h6>
-                              </li>
-                            </ul>
-                          </GridItem>
-                        </Grid>
-                      </Box>
-                      <Box
-                        className="mx-2 my-4 p-1"
-                        border="1px solid gray"
-                        borderRadius="5px"
-                        w="fit-content"
-                      >
-                        <button className="px-4 py-2">
-                          <h5>Show all amenities</h5>
-                        </button>
-                      </Box>
-                    </Box>
-                    <hr />
-                    <Box className="sp-reviews">
-                     
-                    </Box>
+                  <Box className="sp-content-icon-text">
+                    <h5>Experianced host</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
                   </Box>
                 </Box>
               </Box>
-           
+              <hr />
+
+              <Box className="sp-content-description" p="10px">
+                <h6>
+                  We don’t offer any discounts for bookings below 7 days nor
+                  take bookings outside of Airbnb.
+                </h6>
+                <h6>
+                  Vihang Farmhouse is airy, bright, and simplistic with a
+                  wonderful view of the backwaters and grasslands of Gangapur
+                  Dam, an Important Bird Area! We are located a 20 minute drive
+                  away from Sula, York, and Soma vineyards and wineries which
+                  are on the opposite
+                </h6>
+              </Box>
+              <hr />
+              <Box className="where-you-will-sleep pt-4" p="10px">
+                <h4>Where you will sleep</h4>
+                <Box className="sleep-content py-3">
+                  <Box className="sleep-icons d-flex p-1">
+                    <BiBed className="mx-2"></BiBed>
+                    <BiBed></BiBed>
+                  </Box>
+                  <Box className="sleep-box ">
+                    <Box w="fit-content">
+                      <h5>Bedroom</h5>
+                    </Box>
+                    <Box w="60%">
+                      <h6>1 queen bed ,1 single bed</h6>
+                    </Box>
+                  </Box>
+                </Box>
+                <hr />
+
+                <Box className="what-this-offers">
+                  <Box className="offerings-list">
+                    <h4 className="py-2 px-0">What this place offers</h4>
+                    <Box className="offering-box">
+                      <Grid templateColumns="1fr 1fr" gap={2}>
+                        <GridItem w="100% " h="fit-content">
+                          <ul>
+                            <li>
+                              {" "}
+                              <TbToolsKitchen2></TbToolsKitchen2>
+                              <h6>Kitchen</h6>
+                            </li>
+                            <li>
+                              <TbParking></TbParking>
+                              <h6>Parking access</h6>
+                            </li>
+                            <li>
+                              <PiTelevisionSimpleBold></PiTelevisionSimpleBold>
+                              <h6>Television</h6>
+                            </li>
+                            <li>
+                              <MdOutlineBalcony></MdOutlineBalcony>
+                              <h6>Balcony</h6>
+                            </li>
+                            <li>
+                              <BsPersonWorkspace></BsPersonWorkspace>
+                              <h6>Personal workplace</h6>
+                            </li>
+                          </ul>
+                        </GridItem>
+                        <GridItem w="100% " h="fit-content">
+                          <ul>
+                            <li>
+                              <FaSnowflake></FaSnowflake>
+                              <h6>Air conditioning</h6>
+                            </li>
+                            <li>
+                              <FaSwimmingPool></FaSwimmingPool>
+
+                              <h6>Private pool</h6>
+                            </li>
+                            <li>
+                              <FaLuggageCart></FaLuggageCart>
+                              <h6>Luggage cart available</h6>
+                            </li>
+                            <li>
+                              <FaMountain></FaMountain>
+                              <h6>Mountain view</h6>
+                            </li>
+                            <li>
+                              <PiFlowerTulipFill></PiFlowerTulipFill>
+                              <h6>Private garden</h6>
+                            </li>
+                          </ul>
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                    <Box
+                      className="mx-2 my-4 p-1"
+                      border="1px solid gray"
+                      borderRadius="5px"
+                      w="fit-content"
+                    >
+                      <button className="px-4 py-2">
+                        <h5>Show all amenities</h5>
+                      </button>
+                    </Box>
+                  </Box>
+                  <hr />
+                  <Box className="sp-reviews"></Box>
+                </Box>
+              </Box>
+            </Box>
+
             <GridItem
               colSpan="1"
               height="fit-content"
@@ -756,8 +534,7 @@ export default function Cardpage() {
               borderRadius="10px"
               border=" 1px solid lightGray"
               boxShadow=" rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
-            > 
-           
+            >
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -788,7 +565,6 @@ export default function Cardpage() {
                       {bnbData.reviews} reviews
                     </span>
                   </h4>
-             
                 </Box>
               </Box>
               <Box></Box>
@@ -831,7 +607,6 @@ export default function Cardpage() {
                   />
                 </Box>
                 <Box>
-              
                   <Button onClick={onOpen}>Open Modal</Button>
 
                   <Modal isOpen={isOpen} onClose={onClose}>
@@ -954,7 +729,6 @@ export default function Cardpage() {
                   <h5>${(cost / 10 || 0) + (cost || 0)}</h5>
                 </Box>
               </Box>
-             
             </GridItem>
           </SimpleGrid>
 

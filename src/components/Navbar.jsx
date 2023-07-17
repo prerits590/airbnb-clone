@@ -3,7 +3,7 @@ import { BsGlobe } from "react-icons/bs";
 // import { BiSolidUserCircle } from "react-icons/bi";
 import { SearchIcon } from "@chakra-ui/icons";
 // import { BiAtom, IconName } from "react-icons/bi";
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -31,7 +31,6 @@ export default function Navbar() {
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
-                {/* <!-- <span class="navbar-toggler-icon"></span> --> */}
                 <i class=" navbar-toggler-icon"></i>
               </button>
               <div class="collapse navbar-collapse p-2" id="navbarNav">
@@ -58,7 +57,7 @@ export default function Navbar() {
                       <h4 style={{ color: "#FF385C" }}>airbnb</h4>
                     </div>
                     <div className="col-6 d-flex justify-content-center align-items-center nav-items1">
-                      <div className="nav-ul  hover-effect-border">
+                      <div className="nav-ul hover-effect-border">
                         <ul class="navbar-nav mx-auto">
                           <li class="nav-item">
                             <a
@@ -98,26 +97,6 @@ export default function Navbar() {
                       </div>
                     </div>
                     <div className="col-3 px-5">
-                      {/* <div class="header-right border ">
-                        <div class="text-lg-end pt-3 text-div2">
-                          <div className="p-tag-nav">
-                            <h6>Airbnb your home</h6>
-                          </div>
-                          <div className="icon-navbar">
-                          </div>
-                          <div className="nav-user-btn">
-                            <button className="nav-btn border d-flex">
-                              <div className="user1 px-2">
-                                <i class="fa-solid fa-bars"></i>
-                              </div>
-                              <div className="user2">
-                                <i class="fa-solid fa-circle-user"></i>
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      
-                      </div> */}
                       <Box
                         display={"flex"}
                         justifyContent={"space-between"}
@@ -165,4 +144,3 @@ export default function Navbar() {
     </div>
   );
 }
-//rgba(0, 0, 0, 0.1) 0px 4px 12px

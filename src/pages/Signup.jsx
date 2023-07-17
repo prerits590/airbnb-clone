@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [email, setEmail] = useState("");

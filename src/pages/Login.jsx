@@ -7,14 +7,13 @@ import {
   Stack,
   Button,
   Heading,
-  Text,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase";
-import { Link, Navigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -36,11 +35,6 @@ export default function Login() {
         navigate("/Home/:id");
       }, 2000);
 
-      // navigate("/Home/:id");
-      // <Navigate to="/Home/:id" replace={true} />;
-
-      // redirectToHome();
-      // }
       toast({
         title: "Logged in",
         description: "Login Successfull",

@@ -1,14 +1,8 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 
-import {
-  Firestore,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 export default function ProductGrid() {
   //  const [documentData, setDocumentData] = useState(null);

@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Button,
-  Collapse,
   Drawer,
   DrawerContent,
   DrawerOverlay,
@@ -19,22 +18,15 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { AiFillGift } from "react-icons/ai";
-import { BiLogOut } from "react-icons/bi";
-import {
-  BsFillMenuAppFill,
-  BsFillSearchHeartFill,
-  BsGearFill,
-} from "react-icons/bs";
-import { FaBell, FaClipboardCheck, FaRss } from "react-icons/fa6";
+
+import { BsFillMenuAppFill, BsFillSearchHeartFill } from "react-icons/bs";
+import { FaBell } from "react-icons/fa6";
 import { MdAdminPanelSettings, MdHome } from "react-icons/md";
 
-import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import firebase from 'firebase/compat/app';
-// Add a new document in collection "cities"
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Addhome() {
   const sidebar = useDisclosure();
@@ -42,18 +34,29 @@ export default function Addhome() {
   const color = useColorModeValue("gray.600", "gray.300");
 
   const [activeContent, setActiveContent] = useState("home");
+  const [submitClicked, setSubmitClicked] = useState(false);
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [price, setPrice] = useState("");
+  const [title, setTitle] = useState("");
+  const [title2, setTitle2] = useState("");
+  const [gridImg1, setGridImg1] = useState("");
+  const [gridImg2, setGridImg2] = useState("");
+  const [gridImg3, setGridImg3] = useState("");
+  const [gridImg4, setGridImg4] = useState("");
+  const [gridImg5, setGridImg5] = useState("");
+  const [removeId, setRemoveId] = useState("");
+  const [removeSubmit, setRemoveSubmit] = useState(false);
 
   const handleContentClick = (link) => {
     setActiveContent(link);
   };
 
-  const [removeId, setRemoveId] = useState("");
-
-  const [removeSubmit, setRemoveSubmit] = useState(false);
   console.log("remove submit", removeSubmit);
+
   const handleRemoveId = (e) => {
     setRemoveId(e.target.value);
-    console.log("remove idd",removeId);
+    console.log("remove idd", removeId);
   };
 
   const removeProperty = async () => {
@@ -65,13 +68,95 @@ export default function Addhome() {
       console.error("Error deleting data:", error);
     }
   };
-  
 
   useEffect(() => {
     if (removeSubmit) {
       removeProperty();
     }
   }, [removeSubmit]);
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const handleLocation = (e) => {
+    setLocation(e.target.value);
+  };
+  const handlePrice = (e) => {
+    setPrice(e.target.value);
+  };
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleTitle2 = (e) => {
+    setTitle2(e.target.value);
+  };
+  const handleGridImg1 = (e) => {
+    setGridImg1(e.target.value);
+  };
+  const handleGridImg2 = (e) => {
+    setGridImg2(e.target.value);
+  };
+  const handleGridImg3 = (e) => {
+    setGridImg3(e.target.value);
+  };
+  const handleGridImg4 = (e) => {
+    setGridImg4(e.target.value);
+  };
+  const handleGridImg5 = (e) => {
+    setGridImg5(e.target.value);
+  };
+
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const addDocument = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "bnbs"), {
+        hostedBy: name,
+        location: location,
+        price: price,
+        title: title,
+        title2: title2,
+        gridImg1: gridImg1,
+        gridImg2: gridImg2,
+        gridImg3: gridImg3,
+        gridImg4: gridImg4,
+        gridImg5: gridImg5,
+      });
+      setName("");
+      setLocation("");
+      setPrice("");
+      setTitle("");
+      setTitle2("");
+      setGridImg1("");
+      setGridImg2("");
+      setGridImg3("");
+      setGridImg4("");
+      setGridImg5("");
+      setTimeout(() => {
+        navigate("/Home/:id");
+      }, 2000);
+
+      // Set submitClicked to false to prevent infinite re-rendering
+      setSubmitClicked(false);
+      toast({
+        title: "Success",
+        description: "Property Successfully Added",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (submitClicked) {
+      addDocument();
+    }
+  }, [submitClicked]);
 
   const homeContent = () => {
     return (
@@ -337,101 +422,6 @@ export default function Addhome() {
       </Flex>
     </Box>
   );
-  const [submitClicked, setSubmitClicked] = useState(false);
-
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [price, setPrice] = useState("");
-  const [title, setTitle] = useState("");
-  const [title2, setTitle2] = useState("");
-  const [gridImg1, setGridImg1] = useState("");
-  const [gridImg2, setGridImg2] = useState("");
-  const [gridImg3, setGridImg3] = useState("");
-  const [gridImg4, setGridImg4] = useState("");
-  const [gridImg5, setGridImg5] = useState("");
-
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-  const handleLocation = (e) => {
-    setLocation(e.target.value);
-  };
-  const handlePrice = (e) => {
-    setPrice(e.target.value);
-  };
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const handleTitle2 = (e) => {
-    setTitle2(e.target.value);
-  };
-  const handleGridImg1 = (e) => {
-    setGridImg1(e.target.value);
-  };
-  const handleGridImg2 = (e) => {
-    setGridImg2(e.target.value);
-  };
-  const handleGridImg3 = (e) => {
-    setGridImg3(e.target.value);
-  };
-  const handleGridImg4 = (e) => {
-    setGridImg4(e.target.value);
-  };
-  const handleGridImg5 = (e) => {
-    setGridImg5(e.target.value);
-  };
-
-  const toast = useToast();
-  const navigate = useNavigate();
-
-  const addDocument = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "bnbs"), {
-        hostedBy: name,
-        location: location,
-        price: price,
-        title: title,
-        title2: title2,
-        gridImg1: gridImg1,
-        gridImg2: gridImg2,
-        gridImg3: gridImg3,
-        gridImg4: gridImg4,
-        gridImg5: gridImg5,
-      });
-      setName("");
-      setLocation("");
-      setPrice("");
-      setTitle("");
-      setTitle2("");
-      setGridImg1("");
-      setGridImg2("");
-      setGridImg3("");
-      setGridImg4("");
-      setGridImg5("");
-      setTimeout(() => {
-        navigate("/Home/:id");
-      }, 2000);
-
-      // Set submitClicked to false to prevent infinite re-rendering
-      setSubmitClicked(false);
-      toast({
-        title: "Success",
-        description: "Property Successfully Added",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (submitClicked) {
-      addDocument();
-    }
-  }, [submitClicked]);
 
   return (
     <Box
@@ -502,16 +492,7 @@ export default function Addhome() {
             <Input placeholder="Search..." />
           </InputGroup>
 
-          <Flex align="center">
-            <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Avatar
-              ml="4"
-              size="sm"
-              name="anubra266"
-              src="https://avatars.githubusercontent.com/u/30869823?v=4"
-              cursor="pointer"
-            />
-          </Flex>
+         
         </Flex>
 
         <Box as="main" p="4">

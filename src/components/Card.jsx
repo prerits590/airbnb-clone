@@ -1,29 +1,19 @@
 import { Box, Container, Flex, Image, SimpleGrid } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+
 // import {StarIcon} from '@chakra-ui/icons';
 import { FiHeart } from "react-icons/fi";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
-
-import { Firestore, collection, doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
-
 export default function Card({
   hostedBy,
   location,
-
   price,
-
   rating,
-
   reviews,
-
   title,
-
   title2,
   id,
   gridImg1,
-  
 }) {
   const property = {
     imageUrl:
@@ -55,7 +45,6 @@ export default function Card({
                     alt={property.imageAlt}
                     roundedTop="lg"
                   />
-
                   <Box p="0">
                     <Box
                       display="flex"
@@ -64,7 +53,6 @@ export default function Card({
                     >
                       <Box className="text-box2">
                         <h6>{title}</h6>
-
                         <Box className="rating-box">
                           <AiFillStar className="AiFillStar"></AiFillStar>
                           <p className="rating">{rating}</p>
@@ -78,7 +66,6 @@ export default function Card({
                         color="white"
                       ></FiHeart>
                     </Box>
-
                     <Box className="extra-text">
                       <p>63 Kilometers away</p>
                       <p>6-7 Jul</p>
