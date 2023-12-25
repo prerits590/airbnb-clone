@@ -1,19 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-// import Navbar from "./components/Navbar";
-// import Navbar from "./components/Navbar";
-// import Productgrid from "./components/Productgrid";
-// import Switchsec from "./components/Switchsec";
+
 import Homepage from "./pages/Homepage";
 import Cardpage from "./pages/Cardpage";
-import Auth from "./pages/Signup";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
-// import Adminpage from "./pages/Adminpage";
 import Addhome from "./pages/Addhome";
-
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (

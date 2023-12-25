@@ -45,16 +45,16 @@ export default function Navbar() {
                       }}
                     >
                       <a
-                        class="navbar-brand px-1"
+                        class="navbar-brand px-1 d-flex align-items-center"
                         style={{ margin: "0" }}
                         href="/"
                       >
                         <img
                           src="https://cdn-icons-png.flaticon.com/512/2111/2111320.png"
-                          alt=""
+                          alt="" 
                         />
+                        <h4 style={{ color: "#FF385C" }}>airbnb</h4>
                       </a>
-                      <h4 style={{ color: "#FF385C" }}>airbnb</h4>
                     </div>
                     <div className="col-6 d-flex justify-content-center align-items-center nav-items1">
                       <div className="nav-ul hover-effect-border">

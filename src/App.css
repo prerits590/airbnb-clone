@@ -471,3 +471,7 @@ p {
 .submit:active {
   background-color: #06b;
 }
+.hover:hover{
+  background-color: rgb(103, 103, 233);
+  color: black;
+}

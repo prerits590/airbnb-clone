@@ -31,24 +31,34 @@ export default function Homepage() {
   }, []);
   console.log("dataArr", dataArr);
   return (
-    <Link to={`/Home/:id`}>
-      <div>
-        <Navbar></Navbar>
-        <Switchsec></Switchsec>
-        <div className="product-grid ">
-          <Box width="100%" p="0.5rem">
-            <SimpleGrid minChildWidth="290px" spacing="0.1rem">
-              {dataArr?.map((item, index) => {
-                return (
-                  <Box height="auto" p="1rem" width="100%" key={index}>
+    <div>
+      <Navbar />
+      <Switchsec />
+      <div className="product-grid ">
+        <Box width="100%" p="0.5rem">
+          <SimpleGrid
+            className=" d-flex justify-content-evenly"
+            minChildWidth="290px"
+            spacing="0.1rem"
+          >
+            {dataArr?.map((item, index) => {
+              return (
+                <Box className="" w={"fit-content"}>
+                  <Box
+                   
+                    height="auto"
+                    p="1rem"
+                    width="100%"
+                    key={index}
+                  >
                     <Card {...item} />
                   </Box>
-                );
-              })}
-            </SimpleGrid>
-          </Box>
-        </div>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
       </div>
-    </Link>
+    </div>
   );
 }

@@ -109,7 +109,12 @@ export default function Login() {
                 >
                   Login
                 </Button>
-                <Link to={"/"}>Don't have an account? Sign up.</Link>
+                <span>
+                  Don't have an account?{" "}
+                  <span color={"blue.50"}>
+                    <Link to={"/"}>Signup.</Link>
+                  </span>
+                </span>
               </Stack>
             </form>
           </Stack>

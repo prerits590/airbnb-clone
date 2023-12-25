@@ -530,7 +530,6 @@ export default function Cardpage() {
               position="sticky"
               top="0"
               overflowY="auto"
-              // border="solid 1px gray"
               borderRadius="10px"
               border=" 1px solid lightGray"
               boxShadow=" rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
@@ -568,28 +567,26 @@ export default function Cardpage() {
                 </Box>
               </Box>
               <Box></Box>
-              <Box className="sp-input pt-3" display="flex">
-                <Box maxWidth="50%">
-                  <input
-                    type="date"
-                    placeholder="Check-in Date"
-                    width="100%"
-                    className="input-areaa"
-                    value={date1}
-                    onChange={(e) => setDate1(e.target.value)}
-                  />
-                </Box>
-                <Box maxWidth="50%">
-                  <input
-                    type="date"
-                    placeholder="Check-out Date"
-                    width="100% "
-                    className="input-areaa"
-                    value={date2}
-                    onChange={(e) => setDate2(e.target.value)}
-                  />
-                </Box>
+              <Box className="sp-input pt-3 d-flex ">
+                <input
+                  type="date"
+                  placeholder="Check-in Date"
+                  width="100%"
+                  className="input-areaa"
+                  value={date1}
+                  onChange={(e) => setDate1(e.target.value)}
+                />
+
+                <input
+                  type="date"
+                  placeholder="Check-out Date"
+                  width="100% "
+                  className="input-areaa"
+                  value={date2}
+                  onChange={(e) => setDate2(e.target.value)}
+                />
               </Box>
+
               <Box
                 display="flex"
                 flexDirection="column"
@@ -606,8 +603,15 @@ export default function Cardpage() {
                     onChange={(e) => handleGuests(e)}
                   />
                 </Box>
-                <Box>
-                  <Button onClick={onOpen}>Open Modal</Button>
+                <Box p={"10px"}>
+                  <Button
+                    bg={"blue.300"}
+                    color={"white"}
+                    className="hover"
+                    onClick={onOpen}
+                  >
+                    Pay
+                  </Button>
 
                   <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
@@ -732,7 +736,7 @@ export default function Cardpage() {
             </GridItem>
           </SimpleGrid>
 
-          <Box className="owner-info">
+          <Box className="owner-info pt-4">
             <Box display="flex">
               <Box
                 // border="solid white"
@@ -761,7 +765,7 @@ export default function Cardpage() {
                 <h5>Identity Verrified</h5>
               </Box>
             </Box>
-            <Box className="mx-2 mt-4 mb-3" w="40%">
+            <Box className="mx-2 mt-4 mb-3 md:w-25 ">
               <h5>During your stay</h5>
               <h6>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.

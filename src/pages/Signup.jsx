@@ -7,7 +7,6 @@ import {
   Stack,
   Button,
   Heading,
-  Text,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
@@ -70,9 +69,6 @@ export default function Signup() {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
-          </Text>
         </Stack>
         <Box
           rounded={"lg"}
@@ -115,7 +111,13 @@ export default function Signup() {
                 >
                   Sign in
                 </Button>
-                <Link to={"/Login"}>Already have an account? Login.</Link>
+                {/* <Link color="blue" to={"/Login"}>Already have an account? Login.</Link> */}
+                <span>
+                  Already have an account?{" "}
+                  <span color={"blue.50"}>
+                    <Link to={"/Login"}>Login.</Link>
+                  </span>
+                </span>
               </Stack>
             </form>
           </Stack>
