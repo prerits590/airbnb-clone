@@ -26,7 +26,6 @@ export default function Login() {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      // (userCredential) => {
       const user = auth.currentUser;
       console.log("User Signed in", user);
       setEmail("");

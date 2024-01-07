@@ -18,19 +18,15 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-
 import { BsFillMenuAppFill, BsFillSearchHeartFill } from "react-icons/bs";
-import { FaBell } from "react-icons/fa6";
 import { MdAdminPanelSettings, MdHome } from "react-icons/md";
-
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addBnb, removeBnb } from "../redux/fetchBnbs/bnbsAction";
 
 export default function Addhome() {
   const sidebar = useDisclosure();
-  const integrations = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
 
   const [activeContent, setActiveContent] = useState("home");
@@ -51,7 +47,8 @@ export default function Addhome() {
   const handleContentClick = (link) => {
     setActiveContent(link);
   };
-
+  const dispatch = useDispatch();
+  const bnbs = useSelector((state) => state.bnbs.bnbs);
   console.log("remove submit", removeSubmit);
 
   const handleRemoveId = (e) => {
@@ -61,9 +58,16 @@ export default function Addhome() {
 
   const removeProperty = async () => {
     try {
-      const docRef = doc(db, "bnbs", removeId);
-      await deleteDoc(docRef);
-      console.log("Property removed with id:", removeId);
+      dispatch(removeBnb(removeId));
+      toast({
+        title: "Success",
+        description: "Property Successfully Removed",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      setRemoveId("");
     } catch (error) {
       console.error("Error deleting data:", error);
     }
@@ -111,18 +115,20 @@ export default function Addhome() {
 
   const addDocument = async () => {
     try {
-      const docRef = await addDoc(collection(db, "bnbs"), {
-        hostedBy: name,
-        location: location,
-        price: price,
-        title: title,
-        title2: title2,
-        gridImg1: gridImg1,
-        gridImg2: gridImg2,
-        gridImg3: gridImg3,
-        gridImg4: gridImg4,
-        gridImg5: gridImg5,
-      });
+      dispatch(
+        addBnb({
+          hostedBy: name,
+          location: location,
+          price: price,
+          title: title,
+          title2: title2,
+          gridImg1: gridImg1,
+          gridImg2: gridImg2,
+          gridImg3: gridImg3,
+          gridImg4: gridImg4,
+          gridImg5: gridImg5,
+        })
+      );
       setName("");
       setLocation("");
       setPrice("");
@@ -137,7 +143,6 @@ export default function Addhome() {
         navigate("/Home/:id");
       }, 2000);
 
-      // Set submitClicked to false to prevent infinite re-rendering
       setSubmitClicked(false);
       toast({
         title: "Success",
@@ -166,7 +171,7 @@ export default function Addhome() {
             Airbnb your home
           </div>
           <div className="subtitle d-flex justify-content-center">
-            Let's create your account!
+            Let's add your property!
           </div>
           <div className="d-flex p-3 align-items-center justify-content-center">
             <div className="input-container p-1 ">
@@ -491,8 +496,6 @@ export default function Addhome() {
             </InputLeftElement>
             <Input placeholder="Search..." />
           </InputGroup>
-
-         
         </Flex>
 
         <Box as="main" p="4">
