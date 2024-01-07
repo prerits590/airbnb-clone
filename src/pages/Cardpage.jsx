@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
-
 import {
   Box,
   Button,
@@ -24,7 +23,6 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { GoShare } from "react-icons/go";
@@ -39,11 +37,9 @@ import {
 } from "react-icons/fa6";
 import { PiFlowerTulipFill } from "react-icons/pi";
 import { BiBed } from "react-icons/bi";
-
 import { FaLuggageCart, FaSwimmingPool } from "react-icons/fa";
 import { TbParking, TbToolsKitchen2 } from "react-icons/tb";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
-
 import { BsPersonWorkspace } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
 import SpFooter from "../components/SpFooter";
